@@ -19,6 +19,8 @@ class HomeNavigationStackView: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        heightAnchor.constraint(equalToConstant: 80).isActive = true
+        tinderIcon.contentMode = .scaleAspectFit
         tinderIcon.tintColor = .orange
         tinderIcon.setDimensions(height: 40, width: 30)
         settingsButton.setImage(UIImage(systemName: "person.fill"), for: .normal)
