@@ -7,15 +7,15 @@
 
 import UIKit
 
-class BottomControlsStackView: UIStackView {
+final class BottomControlsStackView: UIStackView {
     
     // MARK: - Properties
     
-    let refreshButton = UIButton(type: .custom)
-    let dislikeButton = UIButton(type: .custom)
-    let superLikeButton = UIButton(type: .custom)
-    let likeButton = UIButton(type: .custom)
-    let boostButton = UIButton(type: .custom)
+    private let refreshButton = UIButton(type: .custom)
+    private let dislikeButton = UIButton(type: .custom)
+    private let superLikeButton = UIButton(type: .custom)
+    private let likeButton = UIButton(type: .custom)
+    private let boostButton = UIButton(type: .custom)
         
     // MARK: - Lifecycle
     

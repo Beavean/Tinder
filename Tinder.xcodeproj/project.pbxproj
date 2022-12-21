@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0818A5F32953262500854A5E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5F22953262500854A5E /* User.swift */; };
 		0818A5F729532B7300854A5E /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5F629532B7300854A5E /* CardViewModel.swift */; };
+		0818A5FA295331D500854A5E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5F9295331D500854A5E /* LoginController.swift */; };
+		0818A5FC295331DF00854A5E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5FB295331DF00854A5E /* RegistrationController.swift */; };
+		0818A5FE2953372600854A5E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5FD2953372600854A5E /* CustomTextField.swift */; };
 		0835923C294E6527006BE200 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835923B294E6527006BE200 /* AppDelegate.swift */; };
 		08359240294E6527006BE200 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835923F294E6527006BE200 /* HomeController.swift */; };
 		08359245294E6528006BE200 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08359244294E6528006BE200 /* Assets.xcassets */; };
@@ -23,6 +26,9 @@
 /* Begin PBXFileReference section */
 		0818A5F22953262500854A5E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0818A5F629532B7300854A5E /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		0818A5F9295331D500854A5E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		0818A5FB295331DF00854A5E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		0818A5FD2953372600854A5E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		08359238294E6527006BE200 /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0835923B294E6527006BE200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0835923F294E6527006BE200 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -66,6 +72,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		0818A5F8295331C600854A5E /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				0818A5F9295331D500854A5E /* LoginController.swift */,
+				0818A5FB295331DF00854A5E /* RegistrationController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		0835922F294E6527006BE200 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				0835925829506B4C006BE200 /* Extensions.swift */,
+				0818A5FD2953372600854A5E /* CustomTextField.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -137,6 +153,7 @@
 		08359256294F40F8006BE200 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0818A5F8295331C600854A5E /* Authentication */,
 				0835923F294E6527006BE200 /* HomeController.swift */,
 			);
 			path = Controller;
@@ -292,12 +309,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				08359240294E6527006BE200 /* HomeController.swift in Sources */,
+				0818A5FE2953372600854A5E /* CustomTextField.swift in Sources */,
 				0835925929506B4C006BE200 /* Extensions.swift in Sources */,
 				08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */,
 				0835925B29506D78006BE200 /* HomeNavigationStackView.swift in Sources */,
+				0818A5FA295331D500854A5E /* LoginController.swift in Sources */,
 				0818A5F729532B7300854A5E /* CardViewModel.swift in Sources */,
 				08B2A45F2951145100782E14 /* CardView.swift in Sources */,
 				0835923C294E6527006BE200 /* AppDelegate.swift in Sources */,
+				0818A5FC295331DF00854A5E /* RegistrationController.swift in Sources */,
 				0818A5F32953262500854A5E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

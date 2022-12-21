@@ -7,13 +7,13 @@
 
 import UIKit
 
-class HomeNavigationStackView: UIStackView {
+final class HomeNavigationStackView: UIStackView {
     
     // MARK: - Properties
     
-    let settingsButton = UIButton(type: .system)
-    let messageButton = UIButton(type: .system)
-    let tinderIcon = UIImageView(image: UIImage(systemName: "flame.fill"))
+    private let settingsButton = UIButton(type: .system)
+    private let messageButton = UIButton(type: .system)
+    private let tinderIcon = UIImageView(image: UIImage(systemName: "flame.fill"))
         
     // MARK: - Lifecycle
     

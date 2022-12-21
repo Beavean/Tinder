@@ -12,7 +12,7 @@ enum SwipeDirections: Int {
     case right = 1
 }
 
-class CardView: UIView {
+final class CardView: UIView {
     
     // MARK: - UI Elements
     
