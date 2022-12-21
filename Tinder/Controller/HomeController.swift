@@ -17,7 +17,7 @@ class HomeController: UIViewController {
     private let deckView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemRed
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 10
         return view
     }()
     
@@ -32,8 +32,10 @@ class HomeController: UIViewController {
     // MARK: - Helpers
     
     private func configureCards() {
-        let firstCardView = CardView()
-        let secondCardView = CardView()
+        let firstUser = User(name: "Jane", age: 25, images: [UIImage(named: "jane1")!, UIImage(named: "jane2")!, UIImage(named: "jane3")!])
+        let secondUser = User(name: "Kelly", age: 26, images: [UIImage(named: "kelly1")!, UIImage(named: "kelly2")!, UIImage(named: "kelly3")!])
+        let firstCardView = CardView(viewModel: CardViewModel(user: firstUser))
+        let secondCardView = CardView(viewModel: CardViewModel(user: secondUser))
         deckView.addSubview(firstCardView)
         deckView.addSubview(secondCardView)
         firstCardView.fillSuperview()

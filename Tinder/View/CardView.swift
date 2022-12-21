@@ -25,9 +25,6 @@ class CardView: UIView {
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        let attributedText = NSMutableAttributedString(string: "Full Name ", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy), .foregroundColor: UIColor.white])
-        attributedText.append(NSAttributedString(string: "Age", attributes: [.font: UIFont.systemFont(ofSize: 24), .foregroundColor: UIColor.white]))
-        label.attributedText = attributedText
         return label
     }()
     
@@ -42,23 +39,18 @@ class CardView: UIView {
     // MARK: - Properties
     
     private let gradientLayer = CAGradientLayer()
+    private let viewModel: CardViewModel
     
     // MARK: - Lifecycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(viewModel: CardViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
         configureGestureRecognizers()
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        addSubview(imageView)
-        imageView.fillSuperview()
+        infoLabel.attributedText = viewModel.userInfoText
+        imageView.image = viewModel.user.images.first
+        configureUI()
         configureGradientLayer()
-        addSubview(infoLabel)
-        infoLabel.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
-        addSubview(infoButton)
-        infoButton.setDimensions(height: 40, width: 40)
-        infoButton.centerY(inView: infoLabel)
-        infoButton.anchor(right: rightAnchor, paddingRight: 16)
     }
     
     override func layoutSubviews() {
@@ -85,6 +77,14 @@ class CardView: UIView {
     }
     
     @objc private func handleChangePhoto(sender: UITapGestureRecognizer) {
+        let location = sender.location(in: nil).x
+        let shouldShowNextPhoto = location > self.frame.width / 2
+        if shouldShowNextPhoto {
+            viewModel.showNextPhoto()
+        } else {
+            viewModel.showPreviousPhoto()
+        }
+        imageView.image = viewModel.imageToShow
     }
     
     // MARK: - Helpers
@@ -113,6 +113,19 @@ class CardView: UIView {
                 self.removeFromSuperview()
             }
         }
+    }
+    
+    private func configureUI() {
+        layer.cornerRadius = 10
+        clipsToBounds = true
+        addSubview(imageView)
+        imageView.fillSuperview()
+        addSubview(infoLabel)
+        infoLabel.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
+        addSubview(infoButton)
+        infoButton.setDimensions(height: 40, width: 40)
+        infoButton.centerY(inView: infoLabel)
+        infoButton.anchor(right: rightAnchor, paddingRight: 16)
     }
     
     private func configureGradientLayer() {
