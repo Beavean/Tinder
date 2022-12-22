@@ -12,12 +12,15 @@
 		0818A5FA295331D500854A5E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5F9295331D500854A5E /* LoginController.swift */; };
 		0818A5FC295331DF00854A5E /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5FB295331DF00854A5E /* RegistrationController.swift */; };
 		0818A5FE2953372600854A5E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5FD2953372600854A5E /* CustomTextField.swift */; };
+		0818A6002953447800854A5E /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0818A5FF2953447800854A5E /* AuthButton.swift */; };
 		0835923C294E6527006BE200 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835923B294E6527006BE200 /* AppDelegate.swift */; };
 		08359240294E6527006BE200 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835923F294E6527006BE200 /* HomeController.swift */; };
 		08359245294E6528006BE200 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08359244294E6528006BE200 /* Assets.xcassets */; };
 		08359248294E6528006BE200 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08359246294E6528006BE200 /* LaunchScreen.storyboard */; };
-		0835925929506B4C006BE200 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835925829506B4C006BE200 /* Extensions.swift */; };
+		0835925929506B4C006BE200 /* UIView+Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835925829506B4C006BE200 /* UIView+Anchors.swift */; };
 		0835925B29506D78006BE200 /* HomeNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835925A29506D78006BE200 /* HomeNavigationStackView.swift */; };
+		083B39002954AE7A0082070E /* UIViewController+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B38FF2954AE7A0082070E /* UIViewController+Gradient.swift */; };
+		083B39022954AFE60082070E /* AuthenticationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B39012954AFE60082070E /* AuthenticationSwitchButton.swift */; };
 		08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */; };
 		08B2A45F2951145100782E14 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45E2951145100782E14 /* CardView.swift */; };
 		4EFF66AC1DC5BF63E366CD71 /* Pods_Tinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28D3F402B62A92A1315F7E9 /* Pods_Tinder.framework */; };
@@ -29,14 +32,17 @@
 		0818A5F9295331D500854A5E /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0818A5FB295331DF00854A5E /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		0818A5FD2953372600854A5E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		0818A5FF2953447800854A5E /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		08359238294E6527006BE200 /* Tinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0835923B294E6527006BE200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0835923F294E6527006BE200 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		08359244294E6528006BE200 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08359247294E6528006BE200 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08359249294E6528006BE200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0835925829506B4C006BE200 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0835925829506B4C006BE200 /* UIView+Anchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchors.swift"; sourceTree = "<group>"; };
 		0835925A29506D78006BE200 /* HomeNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationStackView.swift; sourceTree = "<group>"; };
+		083B38FF2954AE7A0082070E /* UIViewController+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Gradient.swift"; sourceTree = "<group>"; };
+		083B39012954AFE60082070E /* AuthenticationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSwitchButton.swift; sourceTree = "<group>"; };
 		08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		08B2A45E2951145100782E14 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		6EFBC3BAD41DD481CBE78FE6 /* Pods-Tinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.debug.xcconfig"; path = "Target Support Files/Pods-Tinder/Pods-Tinder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -117,8 +123,10 @@
 		08359250294F4037006BE200 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				0835925829506B4C006BE200 /* Extensions.swift */,
+				083B38FE2954AE580082070E /* Extensions */,
 				0818A5FD2953372600854A5E /* CustomTextField.swift */,
+				0818A5FF2953447800854A5E /* AuthButton.swift */,
+				083B39012954AFE60082070E /* AuthenticationSwitchButton.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -157,6 +165,15 @@
 				0835923F294E6527006BE200 /* HomeController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		083B38FE2954AE580082070E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0835925829506B4C006BE200 /* UIView+Anchors.swift */,
+				083B38FF2954AE7A0082070E /* UIViewController+Gradient.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		28ACA303EB3FFB10BD6CABB7 /* Frameworks */ = {
@@ -309,15 +326,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				08359240294E6527006BE200 /* HomeController.swift in Sources */,
+				0818A6002953447800854A5E /* AuthButton.swift in Sources */,
 				0818A5FE2953372600854A5E /* CustomTextField.swift in Sources */,
-				0835925929506B4C006BE200 /* Extensions.swift in Sources */,
+				0835925929506B4C006BE200 /* UIView+Anchors.swift in Sources */,
 				08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */,
 				0835925B29506D78006BE200 /* HomeNavigationStackView.swift in Sources */,
 				0818A5FA295331D500854A5E /* LoginController.swift in Sources */,
 				0818A5F729532B7300854A5E /* CardViewModel.swift in Sources */,
 				08B2A45F2951145100782E14 /* CardView.swift in Sources */,
 				0835923C294E6527006BE200 /* AppDelegate.swift in Sources */,
+				083B39022954AFE60082070E /* AuthenticationSwitchButton.swift in Sources */,
 				0818A5FC295331DF00854A5E /* RegistrationController.swift in Sources */,
+				083B39002954AE7A0082070E /* UIViewController+Gradient.swift in Sources */,
 				0818A5F32953262500854A5E /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

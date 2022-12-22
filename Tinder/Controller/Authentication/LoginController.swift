@@ -22,11 +22,33 @@ final class LoginController: UIViewController {
     private let emailTextField = CustomTextField(placeholder: "Email")
     private let passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
     
+    private lazy var authButton: AuthButton = {
+        let button = AuthButton(title: "Sign In", type: .system)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var goToRegistrationButton: AuthenticationSwitchButton = {
+        let button = AuthenticationSwitchButton(firstTitlePart: "Don't have an account?", secondTitlePart: "Sign Up")
+        button.addTarget(self, action: #selector(handleShowRegistration), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func handleLogin() {
+        
+    }
+    
+    @objc private func handleShowRegistration() {
+        navigationController?.pushViewController(RegistrationController(), animated: true)
     }
     
     // MARK: - Helpers
@@ -39,20 +61,12 @@ final class LoginController: UIViewController {
         view.addSubview(iconImageView)
         iconImageView.centerX(inView: view)
         iconImageView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
-        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField])
+        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, authButton])
         stack.axis = .vertical
         stack.spacing = 16
         view.addSubview(stack)
         stack.anchor(top: iconImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 32, paddingRight: 32)
-    }
-    
-    private func configureGradientLayer() {
-        let topColor = UIColor.orange
-        let bottomColor = UIColor.red
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
-        gradientLayer.locations = [0, 1]
-        view.layer.addSublayer(gradientLayer)
-        gradientLayer.frame = view.frame
+        view.addSubview(goToRegistrationButton)
+        goToRegistrationButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
     }
 }
