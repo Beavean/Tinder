@@ -11,6 +11,8 @@ final class LoginController: UIViewController {
     
     // MARK: - UI Elements
     
+    private var viewModel = LoginViewModel()
+    
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         let config = UIImage.SymbolConfiguration(pointSize: 100, weight: .bold)
@@ -24,6 +26,7 @@ final class LoginController: UIViewController {
     
     private lazy var authButton: AuthButton = {
         let button = AuthButton(title: "Sign In", type: .system)
+        button.alpha = 0.5
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
@@ -39,9 +42,19 @@ final class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureTextFieldObservers()
     }
     
     // MARK: - Actions
+    
+    @objc private func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        checkFormStatus()
+    }
     
     @objc private func handleLogin() {
         
@@ -52,6 +65,11 @@ final class LoginController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func checkFormStatus() {
+        authButton.isEnabled = viewModel.formIsValid
+        authButton.alpha = viewModel.formIsValid ? 1 : 0.5
+    }
     
     private func configureUI() {
         navigationController?.navigationBar.isHidden = true
@@ -68,5 +86,10 @@ final class LoginController: UIViewController {
         stack.anchor(top: iconImageView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 32, paddingRight: 32)
         view.addSubview(goToRegistrationButton)
         goToRegistrationButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+    }
+    
+    private func configureTextFieldObservers() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
 }

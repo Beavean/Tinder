@@ -21,6 +21,8 @@
 		0835925B29506D78006BE200 /* HomeNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835925A29506D78006BE200 /* HomeNavigationStackView.swift */; };
 		083B39002954AE7A0082070E /* UIViewController+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B38FF2954AE7A0082070E /* UIViewController+Gradient.swift */; };
 		083B39022954AFE60082070E /* AuthenticationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B39012954AFE60082070E /* AuthenticationSwitchButton.swift */; };
+		083B39042955BECC0082070E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B39032955BECC0082070E /* LoginViewModel.swift */; };
+		083B39062955BEFD0082070E /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B39052955BEFD0082070E /* RegistrationViewModel.swift */; };
 		08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */; };
 		08B2A45F2951145100782E14 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45E2951145100782E14 /* CardView.swift */; };
 		4EFF66AC1DC5BF63E366CD71 /* Pods_Tinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A28D3F402B62A92A1315F7E9 /* Pods_Tinder.framework */; };
@@ -43,6 +45,8 @@
 		0835925A29506D78006BE200 /* HomeNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationStackView.swift; sourceTree = "<group>"; };
 		083B38FF2954AE7A0082070E /* UIViewController+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Gradient.swift"; sourceTree = "<group>"; };
 		083B39012954AFE60082070E /* AuthenticationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSwitchButton.swift; sourceTree = "<group>"; };
+		083B39032955BECC0082070E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		083B39052955BEFD0082070E /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		08B2A45E2951145100782E14 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		6EFBC3BAD41DD481CBE78FE6 /* Pods-Tinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tinder.debug.xcconfig"; path = "Target Support Files/Pods-Tinder/Pods-Tinder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				0818A5F629532B7300854A5E /* CardViewModel.swift */,
+				083B39032955BECC0082070E /* LoginViewModel.swift */,
+				083B39052955BEFD0082070E /* RegistrationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -331,12 +337,14 @@
 				0835925929506B4C006BE200 /* UIView+Anchors.swift in Sources */,
 				08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */,
 				0835925B29506D78006BE200 /* HomeNavigationStackView.swift in Sources */,
+				083B39042955BECC0082070E /* LoginViewModel.swift in Sources */,
 				0818A5FA295331D500854A5E /* LoginController.swift in Sources */,
 				0818A5F729532B7300854A5E /* CardViewModel.swift in Sources */,
 				08B2A45F2951145100782E14 /* CardView.swift in Sources */,
 				0835923C294E6527006BE200 /* AppDelegate.swift in Sources */,
 				083B39022954AFE60082070E /* AuthenticationSwitchButton.swift in Sources */,
 				0818A5FC295331DF00854A5E /* RegistrationController.swift in Sources */,
+				083B39062955BEFD0082070E /* RegistrationViewModel.swift in Sources */,
 				083B39002954AE7A0082070E /* UIViewController+Gradient.swift in Sources */,
 				0818A5F32953262500854A5E /* User.swift in Sources */,
 			);
