@@ -41,6 +41,7 @@ final class RegistrationController: UIViewController {
     // MARK: - Properties
     
     private var viewModel = RegistrationViewModel()
+    private var profileImage: UIImage?
     
     // MARK: - Lifecycle
     
@@ -67,7 +68,19 @@ final class RegistrationController: UIViewController {
     }
     
     @objc private func handleRegisterUser() {
-        
+        guard let email = emailTextField.text,
+              let fullName = fullNameTextField.text,
+              let password = passwordTextField.text,
+              let profileImage
+        else { return }
+        let credentials = AuthCredentials(email: email, password: password, fullName: fullName, profileImage: profileImage)
+        AuthService.registerUser(withCredentials: credentials) { error in
+            if let error {
+                print("DEBUG: Error signing user up", error.localizedDescription)
+                return
+            }
+            print("DEBUG: Successfully registered user")
+        }
     }
     
     @objc private func handleSelectPhoto() {
@@ -112,9 +125,10 @@ final class RegistrationController: UIViewController {
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
+        profileImage = image
         selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         selectPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 0.7).cgColor
         selectPhotoButton.layer.borderWidth = 3
