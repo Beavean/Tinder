@@ -10,11 +10,10 @@ import FirebaseAuth
 
 final class HomeController: UIViewController {
     
-    // MARK: - Properties
+    // MARK: - UI Elements
     
     private let topStack = HomeNavigationStackView()
     private let bottomStack = BottomControlsStackView()
-
     private let deckView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemRed
@@ -22,16 +21,35 @@ final class HomeController: UIViewController {
         return view
     }()
     
+    // MARK: - Properties
+    
+    private var viewModels = [CardViewModel]() {
+        didSet { configureCards() }
+    }
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        configureCards()
         checkIfUserIsLoggedIn()
+        fetchUsers()
     }
     
     // MARK: - API
+    
+    private func fetchUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Service.fetchUser(withUid: uid) { user in
+            print("DEBUG: user is \(user.name)")
+        }
+    }
+    
+    private func fetchUsers() {
+        Service.fetchUsers { users in
+            self.viewModels = users.map({ CardViewModel(user: $0) })
+        }
+    }
     
     private func checkIfUserIsLoggedIn() {
         if Auth.auth().currentUser == nil {
@@ -53,14 +71,11 @@ final class HomeController: UIViewController {
     // MARK: - Helpers
     
     private func configureCards() {
-        let firstUser = User(name: "Jane", age: 25, images: [UIImage(named: "jane1")!, UIImage(named: "jane2")!, UIImage(named: "jane3")!])
-        let secondUser = User(name: "Kelly", age: 26, images: [UIImage(named: "kelly1")!, UIImage(named: "kelly2")!, UIImage(named: "kelly3")!])
-        let firstCardView = CardView(viewModel: CardViewModel(user: firstUser))
-        let secondCardView = CardView(viewModel: CardViewModel(user: secondUser))
-        deckView.addSubview(firstCardView)
-        deckView.addSubview(secondCardView)
-        firstCardView.fillSuperview()
-        secondCardView.fillSuperview()
+        viewModels.forEach { viewModel in
+            let cardView = CardView(viewModel: viewModel)
+            deckView.addSubview(cardView)
+            cardView.fillSuperview()
+        }
     }
     
     private func configureUI() {

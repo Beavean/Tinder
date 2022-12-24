@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 enum SwipeDirections: Int {
     case left = -1
@@ -47,8 +48,6 @@ final class CardView: UIView {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configureGestureRecognizers()
-        infoLabel.attributedText = viewModel.userInfoText
-        imageView.image = viewModel.user.images.first
         configureUI()
         configureGradientLayer()
     }
@@ -84,7 +83,7 @@ final class CardView: UIView {
         } else {
             viewModel.showPreviousPhoto()
         }
-        imageView.image = viewModel.imageToShow
+//        imageView.image = viewModel.imageToShow
     }
     
     // MARK: - Helpers
@@ -118,8 +117,10 @@ final class CardView: UIView {
     private func configureUI() {
         layer.cornerRadius = 10
         clipsToBounds = true
+        imageView.sd_setImage(with: viewModel.imageUrl)
         addSubview(imageView)
         imageView.fillSuperview()
+        infoLabel.attributedText = viewModel.userInfoText
         addSubview(infoLabel)
         infoLabel.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
         addSubview(infoButton)

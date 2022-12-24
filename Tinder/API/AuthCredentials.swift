@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct AuthCredentials{
+struct AuthCredentials {
     
     let email: String
     let password: String
