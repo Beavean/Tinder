@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class HomeController: UIViewController {
     
@@ -27,6 +28,26 @@ final class HomeController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureCards()
+        checkIfUserIsLoggedIn()
+    }
+    
+    // MARK: - API
+    
+    private func checkIfUserIsLoggedIn() {
+        if Auth.auth().currentUser == nil {
+            presentLoginController()
+        } else {
+            print("DEBUG: User is logged in")
+        }
+    }
+    
+    private func logOut() {
+        do {
+            try Auth.auth().signOut()
+            presentLoginController()
+        } catch {
+            print("DEBUG: Failed to sign out")
+        }
     }
     
     // MARK: - Helpers
@@ -51,5 +72,14 @@ final class HomeController: UIViewController {
         stack.isLayoutMarginsRelativeArrangement = true
         stack.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         stack.bringSubviewToFront(deckView)
+    }
+    
+    private func presentLoginController() {
+        DispatchQueue.main.async {
+            let controller = LoginController()
+            let navigation = UINavigationController(rootViewController: controller)
+            navigation.modalPresentationStyle = .fullScreen
+            self.present(navigation, animated: true)
+        }
     }
 }

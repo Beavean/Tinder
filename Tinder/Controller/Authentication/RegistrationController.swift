@@ -79,7 +79,7 @@ final class RegistrationController: UIViewController {
                 print("DEBUG: Error signing user up", error.localizedDescription)
                 return
             }
-            print("DEBUG: Successfully registered user")
+            self.dismiss(animated: true)
         }
     }
     
