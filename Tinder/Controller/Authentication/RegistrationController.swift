@@ -51,7 +51,7 @@ final class RegistrationController: UIViewController {
         configureTextFieldObservers()
     }
     
-    // MARK: - Selectors
+    // MARK: - Actions
     
     @objc private func textDidChange(sender: UITextField) {
         switch sender {
