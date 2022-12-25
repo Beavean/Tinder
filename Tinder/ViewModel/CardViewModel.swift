@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CardViewModel {
+final class CardViewModel {
     
     let user: User
     let userInfoText: NSAttributedString

@@ -10,4 +10,9 @@ import FirebaseFirestore
 struct Constants {
     
     static let FBUsersCollection = Firestore.firestore().collection("users")
+    
+    struct UserInterface {
+        
+        static let settingsCellReuseID = "SettingsCell"
+    }
 }

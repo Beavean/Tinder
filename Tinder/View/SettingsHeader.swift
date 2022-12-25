@@ -7,10 +7,21 @@
 
 import UIKit
 
-class SettingsHeader: UIView {
+protocol SettingsHeaderDelegate: AnyObject {
+    func settingsHeader(_ header: SettingsHeader, didSelect index: Int)
+}
+
+final class SettingsHeader: UIView {
     
     // MARK: - UI Elements
     
+    private lazy var firstButton = createButton(withIndex: 0)
+    private lazy var secondButton = createButton(withIndex: 1)
+    private lazy var thirdButton = createButton(withIndex: 2)
+    
+    // MARK: - Properties
+
+    weak var delegate: SettingsHeaderDelegate?
     var buttons = [UIButton]()
     
     // MARK: - Lifecycle
@@ -18,9 +29,9 @@ class SettingsHeader: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemGroupedBackground
-        let firstButton = createButton()
-        let secondButton = createButton()
-        let thirdButton = createButton()
+        buttons.append(firstButton)
+        buttons.append(secondButton)
+        buttons.append(thirdButton)
         addSubview(firstButton)
         firstButton.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, paddingTop: 16, paddingLeft: 16, paddingBottom: 16)
         firstButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.45).isActive = true
@@ -38,13 +49,13 @@ class SettingsHeader: UIView {
     
     // MARK: - Actions
     
-    @objc private func handleSelectPhoto() {
-        print("DEBUG: Show photo selector here")
+    @objc private func handleSelectPhoto(sender: UIButton) {
+        delegate?.settingsHeader(self, didSelect: sender.tag)
     }
     
     // MARK: - Helpers
     
-    private func createButton() -> UIButton {
+    private func createButton(withIndex index: Int) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle("Select Photo", for: .normal)
         button.layer.cornerRadius = 10
@@ -52,6 +63,7 @@ class SettingsHeader: UIView {
         button.clipsToBounds = true
         button.backgroundColor = .white
         button.imageView?.contentMode = .scaleAspectFill
+        button.tag = index
         return button
     }
 }
