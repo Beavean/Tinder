@@ -16,9 +16,19 @@ final class SettingsController: UITableViewController {
     
     // MARK: - Properties
     
+    private let user: User
     private var imageIndex = 0
     
     // MARK: - Lifecycle
+    
+    init(user: User) {
+        self.user = user
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +57,7 @@ final class SettingsController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
         tableView.separatorStyle = .none
         tableView.tableHeaderView = headerView
+        tableView.backgroundColor = .systemGroupedBackground
         tableView.sectionHeaderTopPadding = 0
         tableView.register(SettingsCell.self, forCellReuseIdentifier: Constants.UserInterface.settingsCellReuseID)
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
@@ -62,15 +73,19 @@ final class SettingsController: UITableViewController {
 extension SettingsController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        SettingsSections.allCases.count
+        SettingsSection.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UserInterface.settingsCellReuseID, for: indexPath) as? SettingsCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UserInterface.settingsCellReuseID, for: indexPath) as? SettingsCell,
+              let section = SettingsSection(rawValue: indexPath.section)
+        else { return UITableViewCell() }
+        let viewModel = SettingsViewModel(user: user, section: section)
+        cell.viewModel = viewModel
         return cell
     }
 }
@@ -84,8 +99,13 @@ extension SettingsController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let section = SettingsSections(rawValue: section) else { return nil }
+        guard let section = SettingsSection(rawValue: section) else { return nil }
         return section.description
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = SettingsSection(rawValue: indexPath.section) else { return 0 }
+        return section == .ageRange ? 96 : 44
     }
 }
 

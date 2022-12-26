@@ -23,6 +23,7 @@ final class HomeController: UIViewController {
     
     // MARK: - Properties
     
+    private var user: User?
     private var viewModels = [CardViewModel]() {
         didSet { configureCards() }
     }
@@ -34,6 +35,7 @@ final class HomeController: UIViewController {
         configureUI()
         checkIfUserIsLoggedIn()
         fetchUsers()
+        fetchUser()
     }
     
     // MARK: - API
@@ -41,7 +43,7 @@ final class HomeController: UIViewController {
     private func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Service.fetchUser(withUid: uid) { user in
-            print("DEBUG: user is \(user.name)")
+            self.user = user
         }
     }
     
@@ -105,7 +107,8 @@ final class HomeController: UIViewController {
 extension HomeController: HomeNavigationStackViewDelegate {
     
     func showSettings() {
-        let controller = SettingsController()
+        guard let user = self.user else { return }
+        let controller = SettingsController(user: user)
         let navigation = UINavigationController(rootViewController: controller)
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true)
