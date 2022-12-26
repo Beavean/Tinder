@@ -14,6 +14,10 @@ struct User {
     var email: String
     let uid: String
     let profileImageUrl: String
+    var profession: String
+    var minSeekingAge: Int
+    var maxSeekingAge: Int
+    var bio: String
     
     init(dictionary: [String: Any]) {
         self.name = dictionary["fullName"] as? String ?? ""
@@ -21,5 +25,9 @@ struct User {
         self.email = dictionary["email"] as? String ?? ""
         self.profileImageUrl = dictionary["imageUrl"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
+        self.profession = dictionary["profession"] as? String ?? ""
+        self.minSeekingAge = dictionary["minSeekingAge"] as? Int ?? 18
+        self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int ?? 40
+        self.bio = dictionary["bio"] as? String ?? ""
     }
 }

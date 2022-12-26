@@ -33,7 +33,9 @@ enum SettingsSection: Int, CaseIterable {
 struct SettingsViewModel {
     
     private let user: User
-    private let section: SettingsSection
+    let section: SettingsSection
+    let placeholderText: String
+    var value: String?
     
     var shouldHideInputField: Bool {
         section == .ageRange
@@ -46,5 +48,18 @@ struct SettingsViewModel {
     init(user: User, section: SettingsSection) {
         self.user = user
         self.section = section
+        placeholderText = "Enter \(section.description.lowercased())..."
+        switch section {
+        case .name:
+            value = user.name
+        case .profession:
+            value = user.profession
+        case .age:
+            value = "\(user.age)"
+        case .bio:
+            value = user.bio
+        case .ageRange:
+            break
+        }
     }
 }

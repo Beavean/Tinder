@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SettingsControllerDelegate: AnyObject {
+    func settingsController(_ controller: SettingsController, wantsToUpdate user: User)
+}
+
 final class SettingsController: UITableViewController {
     
     // MARK: - UI Elements
@@ -16,7 +20,8 @@ final class SettingsController: UITableViewController {
     
     // MARK: - Properties
     
-    private let user: User
+    weak var delegate: SettingsControllerDelegate?
+    private var user: User
     private var imageIndex = 0
     
     // MARK: - Lifecycle
@@ -42,7 +47,8 @@ final class SettingsController: UITableViewController {
     }
     
     @objc private func handleDone() {
-        print("DEBUG: Handle did tap done")
+        view.endEditing(true)
+        delegate?.settingsController(self, wantsToUpdate: user)
     }
     
     // MARK: - Helpers
@@ -86,6 +92,8 @@ extension SettingsController {
         else { return UITableViewCell() }
         let viewModel = SettingsViewModel(user: user, section: section)
         cell.viewModel = viewModel
+        cell.selectionStyle = .none
+        cell.delegate = self
         return cell
     }
 }
@@ -127,5 +135,25 @@ extension SettingsController: UIImagePickerControllerDelegate, UINavigationContr
         let selectedImage = info[.originalImage] as? UIImage
         setHeaderImage(selectedImage)
         dismiss(animated: true)
+    }
+}
+
+// MARK: - SettingsCellDelegate
+
+extension SettingsController: SettingsCellDelegate {
+    func settingsCell(_ cell: SettingsCell, wantsToUpdateUserWith value: String, for section: SettingsSection) {
+        switch section {
+        case .name:
+            user.name = value
+        case .profession:
+            user.profession = value
+        case .age:
+            user.age = Int(value) ?? user.age
+        case .bio:
+            user.bio = value
+        case .ageRange:
+            break
+        }
+        print("DEBUG: User is \(user)")
     }
 }
