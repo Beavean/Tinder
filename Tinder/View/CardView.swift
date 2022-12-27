@@ -115,9 +115,9 @@ final class CardView: UIView {
     }
     
     private func configureUI() {
+        imageView.sd_setImage(with: viewModel.imageUrl)
         layer.cornerRadius = 10
         clipsToBounds = true
-        imageView.sd_setImage(with: viewModel.imageUrl)
         addSubview(imageView)
         imageView.fillSuperview()
         infoLabel.attributedText = viewModel.userInfoText

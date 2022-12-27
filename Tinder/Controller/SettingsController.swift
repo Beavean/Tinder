@@ -15,7 +15,7 @@ final class SettingsController: UITableViewController {
     
     // MARK: - UI Elements
     
-    private let headerView = SettingsHeader()
+    private lazy var headerView = SettingsHeader(user: user)
     private let imagePicker = UIImagePickerController()
     
     // MARK: - Properties
@@ -141,6 +141,15 @@ extension SettingsController: UIImagePickerControllerDelegate, UINavigationContr
 // MARK: - SettingsCellDelegate
 
 extension SettingsController: SettingsCellDelegate {
+    
+    func settingsCell(_ cell: SettingsCell, wantsToUpdateAgeRangeWith sender: UISlider) {
+        if sender == cell.minAgeSlider {
+            user.minSeekingAge = Int(sender.value)
+        } else {
+            user.maxSeekingAge = Int(sender.value)
+        }
+    }
+    
     func settingsCell(_ cell: SettingsCell, wantsToUpdateUserWith value: String, for section: SettingsSection) {
         switch section {
         case .name:
