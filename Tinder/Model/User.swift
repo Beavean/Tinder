@@ -13,7 +13,7 @@ struct User {
     var age: Int
     var email: String
     let uid: String
-    let imageURLs: [String]
+    var imageURLs: [String]
     var profession: String
     var minSeekingAge: Int
     var maxSeekingAge: Int

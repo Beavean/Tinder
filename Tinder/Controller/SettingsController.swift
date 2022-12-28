@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import ProgressHUD
 
 protocol SettingsControllerDelegate: AnyObject {
     func settingsController(_ controller: SettingsController, wantsToUpdate user: User)
+    func settingsControllerWantsToLogout(_ controller: SettingsController)
 }
 
 final class SettingsController: UITableViewController {
@@ -16,6 +18,7 @@ final class SettingsController: UITableViewController {
     // MARK: - UI Elements
     
     private lazy var headerView = SettingsHeader(user: user)
+    private let footerView = SettingsFooter()
     private let imagePicker = UIImagePickerController()
     
     // MARK: - Properties
@@ -48,7 +51,23 @@ final class SettingsController: UITableViewController {
     
     @objc private func handleDone() {
         view.endEditing(true)
-        delegate?.settingsController(self, wantsToUpdate: user)
+        ProgressHUD.show("Saving your data", icon: .succeed, delay: 2)
+        Service.saveUserData(user: user) { error in
+            self.delegate?.settingsController(self, wantsToUpdate: self.user)
+            if let error {
+                ProgressHUD.showError(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: - API
+    
+    func uploadImage(image: UIImage) {
+        ProgressHUD.show("Saving image", icon: .added, delay: 2)
+        Service.uploadImage(image: image) { imageUrl in
+            self.user.imageURLs.append(imageUrl)
+            ProgressHUD.dismiss()
+        }
     }
     
     // MARK: - Helpers
@@ -67,6 +86,9 @@ final class SettingsController: UITableViewController {
         tableView.sectionHeaderTopPadding = 0
         tableView.register(SettingsCell.self, forCellReuseIdentifier: Constants.UserInterface.settingsCellReuseID)
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
+        tableView.tableFooterView = footerView
+        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 88)
+        footerView.delegate = self
     }
     
     private func setHeaderImage(_ image: UIImage?) {
@@ -132,7 +154,8 @@ extension SettingsController: SettingsHeaderDelegate {
 extension SettingsController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        let selectedImage = info[.originalImage] as? UIImage
+        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        uploadImage(image: selectedImage)
         setHeaderImage(selectedImage)
         dismiss(animated: true)
     }
@@ -164,5 +187,14 @@ extension SettingsController: SettingsCellDelegate {
             break
         }
         print("DEBUG: User is \(user)")
+    }
+}
+
+// MARK: - SettingsFooterDelegate
+
+extension SettingsController: SettingsFooterDelegate {
+    
+    func handleLogout() {
+        delegate?.settingsControllerWantsToLogout(self)
     }
 }

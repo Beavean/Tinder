@@ -63,6 +63,7 @@ final class SettingsHeader: UIView {
         let imageURLs = user.imageURLs.map({ URL(string: $0) })
         for (index, url) in imageURLs.enumerated() {
             SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { image, _, _, _, _, _ in
+                guard index < self.buttons.count - 1 else { return }
                 self.buttons[index].setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
             }
         }
