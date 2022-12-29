@@ -14,5 +14,7 @@ struct Constants {
     struct UserInterface {
         
         static let settingsCellReuseID = "SettingsCell"
+        static let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
+
     }
 }

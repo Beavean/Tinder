@@ -16,7 +16,7 @@ final class HomeController: UIViewController {
     private let bottomStack = BottomControlsStackView()
     private let deckView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .systemGroupedBackground
         view.layer.cornerRadius = 10
         return view
     }()

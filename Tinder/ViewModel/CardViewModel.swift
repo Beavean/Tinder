@@ -12,8 +12,11 @@ final class CardViewModel {
     let user: User
     let imageURLs: [String]
     let userInfoText: NSAttributedString
-    var imageUrl: URL?
+    var imageURL: URL?
     private var imageIndex = 0
+    var index: Int {
+        return imageIndex
+    }
     
     init(user: User) {
         self.user = user
@@ -21,18 +24,18 @@ final class CardViewModel {
         attributedText.append(NSAttributedString(string: " \(user.age)", attributes: [.font: UIFont.systemFont(ofSize: 24), .foregroundColor: UIColor.white]))
         self.userInfoText = attributedText
         self.imageURLs = user.imageURLs
-        self.imageUrl = URL(string: user.imageURLs[0])
+        self.imageURL = URL(string: user.imageURLs[0])
     }
     
     func showNextPhoto() {
-//        guard imageIndex < user.images.count - 1 else { return }
-//        imageIndex += 1
-//        self.imageToShow = user.images[imageIndex]
+        guard imageIndex < imageURLs.count - 1 else { return }
+        imageIndex += 1
+        imageURL = URL(string: imageURLs[imageIndex])
     }
     
     func showPreviousPhoto() {
-//        guard imageIndex > 0 else { return }
-//        imageIndex -= 1
-//        self.imageToShow = user.images[imageIndex]
+        guard imageIndex > 0 else { return }
+        imageIndex -= 1
+        imageURL = URL(string: imageURLs[imageIndex])
     }
 }

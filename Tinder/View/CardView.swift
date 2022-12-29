@@ -37,6 +37,8 @@ final class CardView: UIView {
         return button
     }()
     
+    private let barStackView = UIStackView()
+    
     // MARK: - Properties
     
     private let gradientLayer = CAGradientLayer()
@@ -49,7 +51,7 @@ final class CardView: UIView {
         super.init(frame: .zero)
         configureGestureRecognizers()
         configureUI()
-        configureGradientLayer()
+        configureBarStackView()
     }
     
     override func layoutSubviews() {
@@ -84,6 +86,9 @@ final class CardView: UIView {
             viewModel.showPreviousPhoto()
         }
 //        imageView.image = viewModel.imageToShow
+        imageView.sd_setImage(with: viewModel.imageURL)
+        barStackView.arrangedSubviews.forEach({ $0.backgroundColor = Constants.UserInterface.barDeselectedColor })
+        barStackView.arrangedSubviews[viewModel.index].backgroundColor = .white
     }
     
     // MARK: - Helpers
@@ -114,12 +119,26 @@ final class CardView: UIView {
         }
     }
     
+    private func configureBarStackView() {
+        (0..<viewModel.imageURLs.count).forEach { _ in
+            let barView = UIView()
+            barView.backgroundColor = Constants.UserInterface.barDeselectedColor
+            barStackView.addArrangedSubview(barView)
+        }
+        barStackView.arrangedSubviews.first?.backgroundColor = .white
+        addSubview(barStackView)
+        barStackView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8, paddingRight: 8, height: 4)
+        barStackView.spacing = 4
+        barStackView.distribution = .fillEqually
+    }
+    
     private func configureUI() {
-        imageView.sd_setImage(with: viewModel.imageUrl)
+        imageView.sd_setImage(with: viewModel.imageURL)
         layer.cornerRadius = 10
         clipsToBounds = true
         addSubview(imageView)
         imageView.fillSuperview()
+        configureGradientLayer()
         infoLabel.attributedText = viewModel.userInfoText
         addSubview(infoLabel)
         infoLabel.anchor(left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
