@@ -32,6 +32,8 @@
 		088BA4CC29590D5F0030DA5B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088BA4CB29590D5F0030DA5B /* SettingsCell.swift */; };
 		088BA4CE29590F020030DA5B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088BA4CD29590F020030DA5B /* SettingsViewModel.swift */; };
 		08A0024D295BBB980017DFBB /* SettingsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0024C295BBB980017DFBB /* SettingsFooter.swift */; };
+		08A6C48C295DA97F000A1F78 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C48B295DA97F000A1F78 /* ProfileController.swift */; };
+		08A6C48E295DAD03000A1F78 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C48D295DAD03000A1F78 /* ProfileCell.swift */; };
 		08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */; };
 		08B2A45F2951145100782E14 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45E2951145100782E14 /* CardView.swift */; };
 		08C89EB32957250F00A2DB9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C89EB22957250F00A2DB9B /* Constants.swift */; };
@@ -66,6 +68,8 @@
 		088BA4CB29590D5F0030DA5B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		088BA4CD29590F020030DA5B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		08A0024C295BBB980017DFBB /* SettingsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooter.swift; sourceTree = "<group>"; };
+		08A6C48B295DA97F000A1F78 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		08A6C48D295DAD03000A1F78 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
 		08B2A45E2951145100782E14 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		08C89EB22957250F00A2DB9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -86,15 +90,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0818A5F12953261400854A5E /* Model */ = {
+		0818A5F12953261400854A5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				0818A5F22953262500854A5E /* User.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		0818A5F529532B5C00854A5E /* ViewModel */ = {
+		0818A5F529532B5C00854A5E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				0818A5F629532B7300854A5E /* CardViewModel.swift */,
@@ -102,7 +106,7 @@
 				083B39052955BEFD0082070E /* RegistrationViewModel.swift */,
 				088BA4CD29590F020030DA5B /* SettingsViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		0818A5F8295331C600854A5E /* Authentication */ = {
@@ -136,10 +140,10 @@
 			isa = PBXGroup;
 			children = (
 				0835923B294E6527006BE200 /* AppDelegate.swift */,
-				0818A5F12953261400854A5E /* Model */,
-				08359256294F40F8006BE200 /* Controller */,
-				08359253294F4041006BE200 /* View */,
-				0818A5F529532B5C00854A5E /* ViewModel */,
+				0818A5F12953261400854A5E /* Models */,
+				08359256294F40F8006BE200 /* Controllers */,
+				08359253294F4041006BE200 /* Views */,
+				0818A5F529532B5C00854A5E /* ViewModels */,
 				08359251294F403B006BE200 /* API */,
 				08359250294F4037006BE200 /* Utilities */,
 				08359255294F40C8006BE200 /* Files */,
@@ -169,7 +173,7 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		08359253294F4041006BE200 /* View */ = {
+		08359253294F4041006BE200 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				0835925A29506D78006BE200 /* HomeNavigationStackView.swift */,
@@ -178,8 +182,9 @@
 				088BA4C9295903A90030DA5B /* SettingsHeader.swift */,
 				088BA4CB29590D5F0030DA5B /* SettingsCell.swift */,
 				08A0024C295BBB980017DFBB /* SettingsFooter.swift */,
+				08A6C48D295DAD03000A1F78 /* ProfileCell.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		08359255294F40C8006BE200 /* Files */ = {
@@ -193,14 +198,15 @@
 			name = Files;
 			sourceTree = "<group>";
 		};
-		08359256294F40F8006BE200 /* Controller */ = {
+		08359256294F40F8006BE200 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				0818A5F8295331C600854A5E /* Authentication */,
 				0835923F294E6527006BE200 /* HomeController.swift */,
 				088BA4C7295901CC0030DA5B /* SettingsController.swift */,
+				08A6C48B295DA97F000A1F78 /* ProfileController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		083B38FE2954AE580082070E /* Extensions */ = {
@@ -367,6 +373,8 @@
 				083B390E2955CBAE0082070E /* AuthCredentials.swift in Sources */,
 				0818A6002953447800854A5E /* AuthButton.swift in Sources */,
 				088BA4C8295901CC0030DA5B /* SettingsController.swift in Sources */,
+				08A6C48C295DA97F000A1F78 /* ProfileController.swift in Sources */,
+				08A6C48E295DAD03000A1F78 /* ProfileCell.swift in Sources */,
 				08A0024D295BBB980017DFBB /* SettingsFooter.swift in Sources */,
 				0818A5FE2953372600854A5E /* CustomTextField.swift in Sources */,
 				0835925929506B4C006BE200 /* UIView+Anchors.swift in Sources */,

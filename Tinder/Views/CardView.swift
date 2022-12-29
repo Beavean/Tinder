@@ -13,6 +13,10 @@ enum SwipeDirections: Int {
     case right = 1
 }
 
+protocol CardViewDelegate: AnyObject {
+    func cardView(_ view: CardView, wantsToShowProfileFor user: User)
+}
+
 final class CardView: UIView {
     
     // MARK: - UI Elements
@@ -34,14 +38,16 @@ final class CardView: UIView {
         let config = UIImage.SymbolConfiguration(pointSize: 30, weight: .bold)
         button.setImage(UIImage(systemName: "info.circle.fill", withConfiguration: config), for: .normal)
         button.tintColor = .white
+        button.addTarget(self, action: #selector(handleShowProfile), for: .touchUpInside)
         return button
     }()
     
     private let barStackView = UIStackView()
+    private let gradientLayer = CAGradientLayer()
     
     // MARK: - Properties
     
-    private let gradientLayer = CAGradientLayer()
+    weak var delegate: CardViewDelegate?
     private let viewModel: CardViewModel
     
     // MARK: - Lifecycle
@@ -64,6 +70,10 @@ final class CardView: UIView {
     
     // MARK: - Actions
     
+    @objc private func handleShowProfile() {
+        delegate?.cardView(self, wantsToShowProfileFor: viewModel.user)
+    }
+    
     @objc private func handlePanGesture(sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
@@ -85,7 +95,6 @@ final class CardView: UIView {
         } else {
             viewModel.showPreviousPhoto()
         }
-//        imageView.image = viewModel.imageToShow
         imageView.sd_setImage(with: viewModel.imageURL)
         barStackView.arrangedSubviews.forEach({ $0.backgroundColor = Constants.UserInterface.barDeselectedColor })
         barStackView.arrangedSubviews[viewModel.index].backgroundColor = .white

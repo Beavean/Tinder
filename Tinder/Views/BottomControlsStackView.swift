@@ -9,7 +9,7 @@ import UIKit
 
 final class BottomControlsStackView: UIStackView {
     
-    // MARK: - Properties
+    // MARK: - UI Elements
     
     private let refreshButton = UIButton(type: .custom)
     private let dislikeButton = UIButton(type: .custom)
