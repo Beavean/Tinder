@@ -42,7 +42,7 @@ final class CardView: UIView {
         return button
     }()
     
-    private let barStackView = UIStackView()
+    private lazy var barStackView = SegmentedBarView(numberOfSegments: viewModel.imageURLs.count)
     private let gradientLayer = CAGradientLayer()
     
     // MARK: - Properties
@@ -96,8 +96,7 @@ final class CardView: UIView {
             viewModel.showPreviousPhoto()
         }
         imageView.sd_setImage(with: viewModel.imageURL)
-        barStackView.arrangedSubviews.forEach({ $0.backgroundColor = Constants.UserInterface.barDeselectedColor })
-        barStackView.arrangedSubviews[viewModel.index].backgroundColor = .white
+        barStackView.setHighlighted(index: viewModel.index)
     }
     
     // MARK: - Helpers
@@ -129,16 +128,8 @@ final class CardView: UIView {
     }
     
     private func configureBarStackView() {
-        (0..<viewModel.imageURLs.count).forEach { _ in
-            let barView = UIView()
-            barView.backgroundColor = Constants.UserInterface.barDeselectedColor
-            barStackView.addArrangedSubview(barView)
-        }
-        barStackView.arrangedSubviews.first?.backgroundColor = .white
         addSubview(barStackView)
         barStackView.anchor(top: topAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 8, paddingLeft: 8, paddingRight: 8, height: 4)
-        barStackView.spacing = 4
-        barStackView.distribution = .fillEqually
     }
     
     private func configureUI() {
