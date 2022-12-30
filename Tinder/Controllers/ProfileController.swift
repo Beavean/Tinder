@@ -62,6 +62,7 @@ class ProfileController: UIViewController {
     // MARK: - Properties
     
     private let user: User
+    private lazy var viewModel = ProfileViewModel(user: user)
     
     // MARK: - Lifecycle
     
@@ -78,6 +79,7 @@ class ProfileController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureBottomControls()
+        loadUserData()
     }
     
     // MARK: - Actions
@@ -99,6 +101,12 @@ class ProfileController: UIViewController {
     }
     
     // MARK: - Helpers
+    
+    private func loadUserData() {
+        infoLabel.attributedText = viewModel.userDetailsAttributedString
+        professionLabel.text = viewModel.profession
+        bioLabel.text = viewModel.bio
+    }
     
     private func configureUI() {
         view.backgroundColor = .white
@@ -139,16 +147,12 @@ class ProfileController: UIViewController {
 extension ProfileController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        user.imageURLs.count
+        viewModel.imageCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.UserInterface.profileCellReuseID, for: indexPath)
-        if indexPath.row == 0 {
-            cell.backgroundColor = .red
-        } else {
-            cell.backgroundColor = .blue
-        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.UserInterface.profileCellReuseID, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+        cell.imageView.sd_setImage(with: viewModel.imageURLs[indexPath.row])
         return cell
     }
 }
