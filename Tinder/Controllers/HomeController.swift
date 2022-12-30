@@ -162,8 +162,17 @@ extension HomeController: SettingsControllerDelegate {
 
 extension HomeController: CardViewDelegate {
     
+    func cardView(_ view: CardView, didLikeUser: Bool) {
+        view.removeFromSuperview()
+        self.cardViews.removeAll(where: { view == $0 })
+        guard let user = topCardView?.viewModel.user else { return }
+        Service.saveSwipe(forUser: user, isLike: didLikeUser)
+        self.topCardView = cardViews.last
+    }
+    
     func cardView(_ view: CardView, wantsToShowProfileFor user: User) {
         let controller = ProfileController(user: user)
+        controller.delegate = self
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true)
     }
@@ -176,13 +185,35 @@ extension HomeController: BottomControlsStackViewDelegate {
     func handleLike() {
         guard let topCard = topCardView else { return }
         performSwipeAnimation(shouldLike: true)
+        Service.saveSwipe(forUser: topCard.viewModel.user, isLike: true)
     }
     
     func handleDislike() {
+        guard let topCard = topCardView else { return }
         performSwipeAnimation(shouldLike: false)
+        Service.saveSwipe(forUser: topCard.viewModel.user, isLike: false)
     }
     
     func handleRefresh() {
         
+    }
+}
+
+// MARK: - ProfileControllerDelegate
+
+extension HomeController: ProfileControllerDelegate {
+    
+    func profileController(_ controller: ProfileController, didLikeUser user: User) {
+        controller.dismiss(animated: true) {
+            self.performSwipeAnimation(shouldLike: true)
+            Service.saveSwipe(forUser: user, isLike: true)
+        }
+    }
+    
+    func profileController(_ controller: ProfileController, didDislikeUser user: User) {
+        controller.dismiss(animated: true) {
+            self.performSwipeAnimation(shouldLike: false)
+            Service.saveSwipe(forUser: user, isLike: false)
+        }
     }
 }

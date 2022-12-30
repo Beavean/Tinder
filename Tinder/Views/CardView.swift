@@ -15,6 +15,7 @@ enum SwipeDirections: Int {
 
 protocol CardViewDelegate: AnyObject {
     func cardView(_ view: CardView, wantsToShowProfileFor user: User)
+    func cardView(_ view: CardView, didLikeUser: Bool)
 }
 
 final class CardView: UIView {
@@ -48,7 +49,7 @@ final class CardView: UIView {
     // MARK: - Properties
     
     weak var delegate: CardViewDelegate?
-    private let viewModel: CardViewModel
+    let viewModel: CardViewModel
     
     // MARK: - Lifecycle
     
@@ -122,7 +123,8 @@ final class CardView: UIView {
             }
         } completion: { _ in
             if shouldDismissCard {
-                self.removeFromSuperview()
+                let didLike = direction == .right
+                self.delegate?.cardView(self, didLikeUser: didLike)
             }
         }
     }

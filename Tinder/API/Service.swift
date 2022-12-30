@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseStorage
+import FirebaseAuth
 
 struct Service {
     
@@ -50,6 +51,19 @@ struct Service {
                     "minSeekingAge": user.minSeekingAge,
                     "maxSeekingAge": user.maxSeekingAge] as [String: Any]
         Constants.FBUsersCollection.document(user.uid).setData(data, completion: completion)
+    }
+    
+    static func saveSwipe(forUser user: User, isLike: Bool) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        let shouldLike = isLike ? 1 : 0
+        Constants.FBSwipesCollection.document(uid).getDocument { snapshot, error in
+            let data = [user.uid: isLike]
+            if snapshot?.exists == true {
+                Constants.FBSwipesCollection.document(uid).updateData(data)
+            } else {
+                Constants.FBSwipesCollection.document(uid).setData(data)
+            }
+        }
     }
     
     static func uploadImage(image: UIImage, completion: @escaping(String) -> Void) {

@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol ProfileControllerDelegate: AnyObject {
+    func profileController(_ controller: ProfileController, didLikeUser user: User)
+    func profileController(_ controller: ProfileController, didDislikeUser user: User)
+}
+
 class ProfileController: UIViewController {
     
     // MARK: - UI Elements
@@ -68,6 +73,7 @@ class ProfileController: UIViewController {
     
     // MARK: - Properties
     
+    weak var delegate: ProfileControllerDelegate?
     private let user: User
     private lazy var viewModel = ProfileViewModel(user: user)
     
@@ -90,12 +96,8 @@ class ProfileController: UIViewController {
     
     // MARK: - Actions
     
-    @objc private func handleDismissal() {
-        dismiss(animated: true)
-    }
-    
     @objc private func handleDislike() {
-        
+        delegate?.profileController(self, didDislikeUser: user)
     }
     
     @objc private func handleSuperLike() {
@@ -103,7 +105,11 @@ class ProfileController: UIViewController {
     }
     
     @objc private func handleLike() {
-        
+        delegate?.profileController(self, didLikeUser: user)
+    }
+    
+    @objc private func handleDismissal() {
+        dismiss(animated: true)
     }
     
     // MARK: - Helpers

@@ -10,7 +10,8 @@ import FirebaseFirestore
 struct Constants {
     
     static let FBUsersCollection = Firestore.firestore().collection("users")
-    
+    static let FBSwipesCollection = Firestore.firestore().collection("swipes")
+
     struct UserInterface {
         
         static let profileCellReuseID = "ProfileCell"
