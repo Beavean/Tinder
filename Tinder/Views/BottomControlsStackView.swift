@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol BottomControlsStackViewDelegate: AnyObject {
+    func handleLike()
+    func handleDislike()
+    func handleRefresh()
+}
+
 final class BottomControlsStackView: UIStackView {
     
     // MARK: - UI Elements
@@ -16,6 +22,10 @@ final class BottomControlsStackView: UIStackView {
     private let superLikeButton = UIButton(type: .custom)
     private let likeButton = UIButton(type: .custom)
     private let boostButton = UIButton(type: .custom)
+    
+    // MARK: - Properties
+    
+    weak var delegate: BottomControlsStackViewDelegate?
         
     // MARK: - Lifecycle
     
@@ -34,6 +44,9 @@ final class BottomControlsStackView: UIStackView {
         likeButton.tintColor = .cyan
         boostButton.setImage(UIImage(systemName: "bolt.fill", withConfiguration: config), for: .normal)
         boostButton.tintColor = .systemPurple
+        refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
+        dislikeButton.addTarget(self, action: #selector(handleDislike), for: .touchUpInside)
+        likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
         [refreshButton, dislikeButton, superLikeButton, likeButton, boostButton].forEach { view in
             addArrangedSubview(view)
         }
@@ -41,5 +54,20 @@ final class BottomControlsStackView: UIStackView {
 
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func handleRefresh() {
+        delegate?.handleRefresh()
+    }
+    
+    @objc private func handleDislike() {
+        delegate?.handleDislike()
+
+    }
+    
+    @objc private func handleLike() {
+        delegate?.handleLike()
     }
 }
