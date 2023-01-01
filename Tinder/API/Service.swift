@@ -22,19 +22,22 @@ struct Service {
         }
     }
     
-    static func fetchUsers(completion: @escaping([User]) -> Void) {
+    static func fetchUsers(forCurrentUser user: User, completion: @escaping([User]) -> Void) {
         var users = [User]()
+        let query = Constants.FBSwipesCollection
+            .whereField("age", isGreaterThanOrEqualTo: user.minSeekingAge)
+            .whereField("age", isLessThanOrEqualTo: user.maxSeekingAge)
         Constants.FBUsersCollection.getDocuments { snapshot, error in
+            guard let snapshot else { return }
             if let error {
                 print("DEBUG: Error fetching users -  \(error.localizedDescription)")
             }
-            snapshot?.documents.forEach({ document in
+            snapshot.documents.forEach({ document in
                 let dictionary = document.data()
                 let user = User(dictionary: dictionary)
+                guard user.uid != Auth.auth().currentUser?.uid else { return }
                 users.append(user)
-                if users.count == snapshot?.documents.count {
-                    print("DEBUG: Document count is \(snapshot?.documents.count)")
-                    print("DEBUG: Users array count is \(users.count)")
+                if users.count == snapshot.documents.count - 1 {
                     completion(users)
                 }
             })

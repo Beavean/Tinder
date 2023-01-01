@@ -21,10 +21,6 @@ final class RegistrationController: UIViewController {
         return button
     }()
     
-    private let emailTextField = CustomTextField(placeholder: "Email")
-    private let fullNameTextField = CustomTextField(placeholder: "Full Name")
-    private let passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
-    
     private lazy var authButton: AuthButton = {
         let button = AuthButton(title: "Sign Up", type: .system)
         button.addTarget(self, action: #selector(handleRegisterUser), for: .touchUpInside)
@@ -38,10 +34,15 @@ final class RegistrationController: UIViewController {
         return button
     }()
     
+    private let emailTextField = CustomTextField(placeholder: "Email")
+    private let fullNameTextField = CustomTextField(placeholder: "Full Name")
+    private let passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
+    
     // MARK: - Properties
     
     private var viewModel = RegistrationViewModel()
     private var profileImage: UIImage?
+    weak var delegate: AuthenticationDelegate?
     
     // MARK: - Lifecycle
     
@@ -79,7 +80,7 @@ final class RegistrationController: UIViewController {
                 print("DEBUG: Error signing user up", error.localizedDescription)
                 return
             }
-            self.dismiss(animated: true)
+            self.delegate?.authenticationComplete()
         }
     }
     

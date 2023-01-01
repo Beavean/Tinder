@@ -7,11 +7,13 @@
 
 import UIKit
 
+protocol AuthenticationDelegate: AnyObject {
+    func authenticationComplete()
+}
+
 final class LoginController: UIViewController {
     
     // MARK: - UI Elements
-    
-    private var viewModel = LoginViewModel()
     
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -20,9 +22,6 @@ final class LoginController: UIViewController {
         imageView.tintColor = .white
         return imageView
     }()
-    
-    private let emailTextField = CustomTextField(placeholder: "Email")
-    private let passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
     
     private lazy var authButton: AuthButton = {
         let button = AuthButton(title: "Sign In", type: .system)
@@ -36,6 +35,14 @@ final class LoginController: UIViewController {
         button.addTarget(self, action: #selector(handleShowRegistration), for: .touchUpInside)
         return button
     }()
+    
+    private let emailTextField = CustomTextField(placeholder: "Email")
+    private let passwordTextField = CustomTextField(placeholder: "Password", isSecureField: true)
+    
+    // MARK: - Properties
+    
+    private var viewModel = LoginViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     // MARK: - Lifecycle
     
@@ -64,12 +71,14 @@ final class LoginController: UIViewController {
                 print("DEBUG: Error signing user in \(error.localizedDescription)")
                 return
             }
-            self.dismiss(animated: true)
+            self.delegate?.authenticationComplete()
         }
     }
     
     @objc private func handleShowRegistration() {
-        navigationController?.pushViewController(RegistrationController(), animated: true)
+        let controller = RegistrationController()
+        controller.delegate = delegate
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - Helpers

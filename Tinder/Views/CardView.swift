@@ -135,6 +135,7 @@ final class CardView: UIView {
     }
     
     private func configureUI() {
+        backgroundColor = .white
         imageView.sd_setImage(with: viewModel.imageURL)
         layer.cornerRadius = 10
         clipsToBounds = true
