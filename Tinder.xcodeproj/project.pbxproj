@@ -27,6 +27,7 @@
 		083B390A2955CAFA0082070E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B39092955CAFA0082070E /* AuthService.swift */; };
 		083B390C2955CB040082070E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B390B2955CB040082070E /* Service.swift */; };
 		083B390E2955CBAE0082070E /* AuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083B390D2955CBAE0082070E /* AuthCredentials.swift */; };
+		0865622A29624CF600964FDD /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0865622929624CF600964FDD /* MatchView.swift */; };
 		088BA4C8295901CC0030DA5B /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088BA4C7295901CC0030DA5B /* SettingsController.swift */; };
 		088BA4CA295903A90030DA5B /* SettingsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088BA4C9295903A90030DA5B /* SettingsHeader.swift */; };
 		088BA4CC29590D5F0030DA5B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088BA4CB29590D5F0030DA5B /* SettingsCell.swift */; };
@@ -65,6 +66,7 @@
 		083B39092955CAFA0082070E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		083B390B2955CB040082070E /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		083B390D2955CBAE0082070E /* AuthCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCredentials.swift; sourceTree = "<group>"; };
+		0865622929624CF600964FDD /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		088BA4C7295901CC0030DA5B /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		088BA4C9295903A90030DA5B /* SettingsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeader.swift; sourceTree = "<group>"; };
 		088BA4CB29590D5F0030DA5B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				08A0024C295BBB980017DFBB /* SettingsFooter.swift */,
 				08A6C48D295DAD03000A1F78 /* ProfileCell.swift */,
 				08B8A209295F41190004083E /* SegmentedBarView.swift */,
+				0865622929624CF600964FDD /* MatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				0835925B29506D78006BE200 /* HomeNavigationStackView.swift in Sources */,
 				088BA4CA295903A90030DA5B /* SettingsHeader.swift in Sources */,
 				083B39042955BECC0082070E /* LoginViewModel.swift in Sources */,
+				0865622A29624CF600964FDD /* MatchView.swift in Sources */,
 				0818A5FA295331D500854A5E /* LoginController.swift in Sources */,
 				0818A5F729532B7300854A5E /* CardViewModel.swift in Sources */,
 				08B2A45F2951145100782E14 /* CardView.swift in Sources */,

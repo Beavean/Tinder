@@ -56,16 +56,23 @@ struct Service {
         Constants.FBUsersCollection.document(user.uid).setData(data, completion: completion)
     }
     
-    static func saveSwipe(forUser user: User, isLike: Bool) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        let shouldLike = isLike ? 1 : 0
-        Constants.FBSwipesCollection.document(uid).getDocument { snapshot, error in
+    static func saveSwipe(forUser user: User, isLike: Bool, completion: ((Error?) -> Void)?) {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        Constants.FBSwipesCollection.document(currentUid).getDocument { snapshot, error in
             let data = [user.uid: isLike]
             if snapshot?.exists == true {
-                Constants.FBSwipesCollection.document(uid).updateData(data)
+                Constants.FBSwipesCollection.document(currentUid).updateData(data, completion: completion)
             } else {
-                Constants.FBSwipesCollection.document(uid).setData(data)
+                Constants.FBSwipesCollection.document(currentUid).setData(data, completion: completion)
             }
+        }
+    }
+    
+    static func checkIfMatchExists(forUser user: User, completion: @escaping(Bool) -> Void) {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        Constants.FBSwipesCollection.document(user.uid).getDocument { snapshot, error in
+            guard let data = snapshot?.data(), let didMatch = data[currentUid] as? Bool else { return }
+            completion(didMatch)
         }
     }
     
