@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MatchViewDelegate: AnyObject {
+    func matchView(_ view: MatchView, wantsToSendMessageTo user: User)
+}
+
 class MatchView: UIView {
     
     // MARK: - UI Elements
@@ -21,9 +25,9 @@ class MatchView: UIView {
     ]
     
     private let matchImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "exclamationmark.circle"))
+        let imageView = UIImageView(image: UIImage(systemName: "heart.rectangle.fill"))
         imageView.contentMode = .scaleAspectFill
-        imageView.tintColor = .red
+        imageView.tintColor = .systemRed
         return imageView
     }()
     
@@ -67,7 +71,7 @@ class MatchView: UIView {
         let button = KeepSwipingButton(type: .system)
         button.setTitle("Keep Swiping", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(didTapKeepSwiping), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
         return button
     }()
     
@@ -75,15 +79,15 @@ class MatchView: UIView {
     
     // MARK: - Properties
     
-    private let currentUser: User
-    private let matchedUser: User
-        
+    private let viewModel: MatchViewViewModel
+    weak var delegate: MatchViewDelegate?
+    
     // MARK: - Lifecycle
     
-    init(currentUser: User, matchedUser: User) {
-        self.currentUser = currentUser
-        self.matchedUser = matchedUser
+    init(viewModel: MatchViewViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
+        loadUserData()
         configureBlurView()
         configureUI()
         configureAnimations()
@@ -96,11 +100,7 @@ class MatchView: UIView {
     // MARK: - Actions
     
     @objc private func didTapSendMessage() {
-        
-    }
-    
-    @objc private func didTapKeepSwiping() {
-        
+        delegate?.matchView(self, wantsToSendMessageTo: viewModel.matchedUser)
     }
     
     @objc private func handleDismissal() {
@@ -113,17 +113,25 @@ class MatchView: UIView {
     
     // MARK: - Helpers
     
+    private func loadUserData() {
+        descriptionLabel.text = viewModel.matchLabelText
+        currentUserImageView.sd_setImage(with: viewModel.currentUserImageUrl)
+        matchedUserImageView.sd_setImage(with: viewModel.matchedUserImageUrl)
+    }
+    
+    // MARK: - Configuration
+    
     private func configureUI() {
         views.forEach { view in
             addSubview(view)
             view.alpha = 1
         }
-        currentUserImageView.anchor(left: centerXAnchor, paddingLeft: 16)
+        currentUserImageView.anchor(right: centerXAnchor, paddingRight: 16)
         currentUserImageView.setDimensions(height: 140, width: 140)
         currentUserImageView.layer.cornerRadius = 140 / 2
         currentUserImageView.centerY(inView: self)
         
-        matchedUserImageView.anchor(right: centerXAnchor, paddingRight: 16)
+        matchedUserImageView.anchor(left: centerXAnchor, paddingLeft: 16)
         matchedUserImageView.setDimensions(height: 140, width: 140)
         matchedUserImageView.layer.cornerRadius = 140 / 2
         matchedUserImageView.centerY(inView: self)
@@ -137,7 +145,7 @@ class MatchView: UIView {
         descriptionLabel.anchor(left: leftAnchor, bottom: currentUserImageView.topAnchor, right: rightAnchor, paddingBottom: 32)
         
         matchImageView.anchor(bottom: descriptionLabel.topAnchor)
-        matchImageView.setDimensions(height: 80, width: 300)
+        matchImageView.setDimensions(height: 150, width: 150)
         matchImageView.centerX(inView: self)
     }
     

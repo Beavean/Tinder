@@ -34,7 +34,7 @@ struct SettingsViewModel {
     
     // MARK: - Properties
     
-    private let user: User
+    let user: User
     let section: SettingsSection
     let placeholderText: String
     var value: String?
