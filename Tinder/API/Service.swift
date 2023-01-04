@@ -24,23 +24,36 @@ struct Service {
     
     static func fetchUsers(forCurrentUser user: User, completion: @escaping([User]) -> Void) {
         var users = [User]()
-        let query = Constants.FBSwipesCollection
+        let query = Constants.FBUsersCollection
             .whereField("age", isGreaterThanOrEqualTo: user.minSeekingAge)
             .whereField("age", isLessThanOrEqualTo: user.maxSeekingAge)
-        Constants.FBUsersCollection.getDocuments { snapshot, error in
-            guard let snapshot else { return }
-            if let error {
-                print("DEBUG: Error fetching users -  \(error.localizedDescription)")
-            }
-            snapshot.documents.forEach({ document in
-                let dictionary = document.data()
-                let user = User(dictionary: dictionary)
-                guard user.uid != Auth.auth().currentUser?.uid else { return }
-                users.append(user)
-                if users.count == snapshot.documents.count - 1 {
-                    completion(users)
+        fetchSwipes { swipedUserIDs in
+            query.getDocuments { snapshot, error in
+                guard let snapshot else { return }
+                if let error {
+                    print("DEBUG: Error fetching users -  \(error.localizedDescription)")
                 }
-            })
+                snapshot.documents.forEach({ document in
+                    let dictionary = document.data()
+                    let user = User(dictionary: dictionary)
+                    guard user.uid != Auth.auth().currentUser?.uid,
+                    swipedUserIDs[user.uid] == nil
+                    else { return }
+                    users.append(user)
+                })
+                completion(users)
+            }
+        }
+    }
+    
+    private static func fetchSwipes(completion: @escaping([String: Bool]) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Constants.FBSwipesCollection.document(uid).getDocument { snapshot, error in
+            guard let data = snapshot?.data() as? [String: Bool] else {
+                completion([String: Bool]())
+                return
+            }
+            completion(data)
         }
     }
     

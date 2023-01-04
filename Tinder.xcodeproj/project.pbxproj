@@ -36,6 +36,7 @@
 		088BA4CC29590D5F0030DA5B /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088BA4CB29590D5F0030DA5B /* SettingsCell.swift */; };
 		088BA4CE29590F020030DA5B /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088BA4CD29590F020030DA5B /* SettingsViewModel.swift */; };
 		08A0024D295BBB980017DFBB /* SettingsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A0024C295BBB980017DFBB /* SettingsFooter.swift */; };
+		08A65F20296631C400F1E0BB /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A65F1F296631C400F1E0BB /* MessagesController.swift */; };
 		08A6C48C295DA97F000A1F78 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C48B295DA97F000A1F78 /* ProfileController.swift */; };
 		08A6C48E295DAD03000A1F78 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C48D295DAD03000A1F78 /* ProfileCell.swift */; };
 		08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */; };
@@ -78,6 +79,7 @@
 		088BA4CB29590D5F0030DA5B /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		088BA4CD29590F020030DA5B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		08A0024C295BBB980017DFBB /* SettingsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooter.swift; sourceTree = "<group>"; };
+		08A65F1F296631C400F1E0BB /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		08A6C48B295DA97F000A1F78 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		08A6C48D295DAD03000A1F78 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				0835923F294E6527006BE200 /* HomeController.swift */,
 				088BA4C7295901CC0030DA5B /* SettingsController.swift */,
 				08A6C48B295DA97F000A1F78 /* ProfileController.swift */,
+				08A65F1F296631C400F1E0BB /* MessagesController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				083B39062955BEFD0082070E /* RegistrationViewModel.swift in Sources */,
 				083B390A2955CAFA0082070E /* AuthService.swift in Sources */,
 				083B39002954AE7A0082070E /* UIViewController+Gradient.swift in Sources */,
+				08A65F20296631C400F1E0BB /* MessagesController.swift in Sources */,
 				0865622C296466C400964FDD /* SendMessageButton.swift in Sources */,
 				0818A5F32953262500854A5E /* User.swift in Sources */,
 				088BA4CE29590F020030DA5B /* SettingsViewModel.swift in Sources */,
