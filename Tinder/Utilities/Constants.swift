@@ -17,6 +17,7 @@ struct Constants {
         static let profileCellReuseID = "ProfileCell"
         static let settingsCellReuseID = "SettingsCell"
         static let messagesCellReuseID = "MessagesCell"
+        static let matchMessagesCellReuseID = "MatchCell"
 
         static let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
 

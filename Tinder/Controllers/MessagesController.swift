@@ -9,6 +9,10 @@ import UIKit
 
 class MessagesController: UITableViewController {
     
+    // MARK: - UI Elements
+    
+    private let headerView = MatchHeader()
+    
     // MARK: - Properties
     
     private let user: User
@@ -42,6 +46,9 @@ class MessagesController: UITableViewController {
         tableView.rowHeight = 80
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.UserInterface.messagesCellReuseID)
+        
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        tableView.tableHeaderView = headerView
     }
     
     private func configureNavigationBar() {
