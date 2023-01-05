@@ -23,6 +23,7 @@ class MessagesController: UITableViewController {
         super.viewDidLoad()
         configureTableView()
         configureNavigationBar()
+        fetchMatches()
     }
     
     init(user: User) {
@@ -40,13 +41,21 @@ class MessagesController: UITableViewController {
         dismiss(animated: true)
     }
     
+    // MARK: - API
+    
+    private func fetchMatches() {
+        Service.fetchMatches { matches in
+            self.headerView.matches = matches
+        }
+    }
+    
     // MARK: - Helpers
     
     private func configureTableView() {
         tableView.rowHeight = 80
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.UserInterface.messagesCellReuseID)
-        
+        headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
         tableView.tableHeaderView = headerView
     }
@@ -94,5 +103,17 @@ extension MessagesController {
         view.addSubview(label)
         label.centerY(inView: view, leftAnchor: view.leftAnchor, paddingLeft: 12)
         return view
+    }
+}
+
+// MARK: - MatchHeaderDelegate
+
+extension MessagesController: MatchHeaderDelegate {
+    
+    func matchHeader(_ header: MatchHeader, wantsToStartChatWith uid: String) {
+        Service.fetchUser(withUid: uid) { user in
+            // FIXME: - Add chat module
+            print("DEBUG: Should start chat with \(user.name)")
+        }
     }
 }

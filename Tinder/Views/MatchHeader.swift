@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol MatchHeaderDelegate: AnyObject {
+    func matchHeader(_ header: MatchHeader, wantsToStartChatWith uid: String)
+}
+
 class MatchHeader: UICollectionReusableView {
     
     // MARK: - UI Elements
@@ -30,6 +34,15 @@ class MatchHeader: UICollectionReusableView {
         return collectionView
     }()
     
+    // MARK: - Properties
+    
+    weak var delegate: MatchHeaderDelegate?
+    var matches = [Match]() {
+        didSet { collectionView.reloadData() }
+    }
+    
+    // MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -49,11 +62,12 @@ class MatchHeader: UICollectionReusableView {
 extension MatchHeader: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        matches.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.UserInterface.matchMessagesCellReuseID, for: indexPath) as? MatchCell else { return UICollectionViewCell() }
+        cell.viewModel = MatchCellViewModel(match: matches[indexPath.row])
         return cell
     }
 }
@@ -61,7 +75,10 @@ extension MatchHeader: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension MatchHeader: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let uid = matches[indexPath.row].uid
+        delegate?.matchHeader(self, wantsToStartChatWith: uid)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -69,6 +86,6 @@ extension MatchHeader: UICollectionViewDelegate {
 extension MatchHeader: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 108)
+        return CGSize(width: 80, height: 140)
     }
 }

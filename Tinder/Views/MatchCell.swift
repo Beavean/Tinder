@@ -24,13 +24,21 @@ class MatchCell: UICollectionViewCell {
     
     private let usernameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Username"
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         label.textColor = .darkGray
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         return label
     }()
+    
+    // MARK: - Properties
+    
+    var viewModel: MatchCellViewModel! {
+        didSet {
+            usernameLabel.text = viewModel.nameText
+            profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        }
+    }
     
     // MARK: - Lifecycle
     

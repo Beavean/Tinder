@@ -11,6 +11,8 @@ import FirebaseAuth
 
 struct Service {
     
+    // MARK: - Fetch
+    
     static func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
         Constants.FBUsersCollection.document(uid).getDocument { snapshot, error in
             if let error {
@@ -57,6 +59,18 @@ struct Service {
         }
     }
     
+    static func fetchMatches(completion: @escaping([Match]) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Constants.FBMatchedMessagesCollection.document(uid).collection("matches").getDocuments { snapshot, error in
+            guard let snapshot else { return }
+            let matches = snapshot.documents.map({ Match(dictionary: $0.data()) })
+            completion(matches)
+            
+        }
+    }
+    
+    // MARK: - Upload
+    
     static func saveUserData(user: User, completion: @escaping(Error?) -> Void) {
         let data = ["uid": user.uid,
                     "fullName": user.name,
@@ -78,14 +92,6 @@ struct Service {
             } else {
                 Constants.FBSwipesCollection.document(currentUid).setData(data, completion: completion)
             }
-        }
-    }
-    
-    static func checkIfMatchExists(forUser user: User, completion: @escaping(Bool) -> Void) {
-        guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        Constants.FBSwipesCollection.document(user.uid).getDocument { snapshot, error in
-            guard let data = snapshot?.data(), let didMatch = data[currentUid] as? Bool else { return }
-            completion(didMatch)
         }
     }
     
@@ -131,6 +137,16 @@ struct Service {
                 guard let imageUrl = url?.absoluteString else { return }
                 completion(imageUrl)
             }
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    static func checkIfMatchExists(forUser user: User, completion: @escaping(Bool) -> Void) {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        Constants.FBSwipesCollection.document(user.uid).getDocument { snapshot, error in
+            guard let data = snapshot?.data(), let didMatch = data[currentUid] as? Bool else { return }
+            completion(didMatch)
         }
     }
 }
