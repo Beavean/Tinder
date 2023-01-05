@@ -11,6 +11,7 @@ struct Constants {
     
     static let FBUsersCollection = Firestore.firestore().collection("users")
     static let FBSwipesCollection = Firestore.firestore().collection("swipes")
+    static let FBMatchedMessagesCollection = Firestore.firestore().collection("matched_messages")
 
     struct UserInterface {
         

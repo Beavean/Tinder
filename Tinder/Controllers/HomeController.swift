@@ -78,8 +78,10 @@ final class HomeController: UIViewController {
         Service.saveSwipe(forUser: user, isLike: didLike) { [weak self] error in
             self?.topCardView = self?.cardViews.last
             guard didLike else { return }
-            Service.checkIfMatchExists(forUser: user) { didMatch in
+            Service.checkIfMatchExists(forUser: user) { _ in
                 self?.presentMatchView(forUser: user)
+                guard let currentUser = self?.user else { return }
+                Service.uploadMatch(currentUser: currentUser, matchedUser: user)
             }
         }
     }

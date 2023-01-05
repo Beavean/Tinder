@@ -89,6 +89,31 @@ struct Service {
         }
     }
     
+    static func uploadMatch(currentUser: User, matchedUser: User) {
+        guard let profileImageUrl = matchedUser.imageURLs.first,
+        let currentUserProfileImageUrl = currentUser.imageURLs.first
+        else { return }
+        
+        let matchedUserData = ["uid": matchedUser.uid,
+                               "name": matchedUser.name,
+                               "profileImageUrl": profileImageUrl]
+        Constants.FBMatchedMessagesCollection
+            .document(currentUser.uid)
+            .collection("matches")
+            .document(matchedUser.uid)
+            .setData(matchedUserData)
+        
+        let currentUserData = ["uid": currentUser.uid,
+                               "name": currentUser.name,
+                               "profileImageUrl": currentUserProfileImageUrl]
+        Constants.FBMatchedMessagesCollection
+            .document(matchedUser.uid)
+            .collection("matches")
+            .document(currentUser.uid)
+            .setData(currentUserData)
+        
+    }
+    
     static func uploadImage(image: UIImage, completion: @escaping(String) -> Void) {
         guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
         let filename = NSUUID().uuidString
