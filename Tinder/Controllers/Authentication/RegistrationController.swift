@@ -53,6 +53,8 @@ final class RegistrationController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureTextFieldObservers()
+        configureNotificationObservers()
+        addKeyboardDismissal()
     }
     
     // MARK: - Actions
@@ -100,6 +102,27 @@ final class RegistrationController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @objc private func keyboardWillShow(sender: NSNotification) {
+        let elementToCover = authButton
+        guard let userInfo = sender.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+              let lowestFrame = elementToCover.superview?.convert(elementToCover.frame, to: nil)
+        else { return }
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        let frameOriginY = self.view.frame.origin.y - keyboardHeight + (view.frame.height - lowestFrame.maxY)
+        self.view.frame.origin.y = frameOriginY
+    }
+    
+    @objc private func keyboardWillHide() {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     // MARK: - Helpers
     
     private func checkFormStatus() {
@@ -120,6 +143,19 @@ final class RegistrationController: UIViewController {
         stack.anchor(top: selectPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 32, paddingRight: 32)
         view.addSubview(goToLoginButton)
         goToLoginButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+    }
+    
+    private func configureNotificationObservers() {
+        let showNotification = UIResponder.keyboardWillShowNotification
+        let hideNotification = UIResponder.keyboardWillHideNotification
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillShow), name: showNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillHide), name: hideNotification, object: nil)
+    }
+    
+    private func addKeyboardDismissal() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     private func configureTextFieldObservers() {

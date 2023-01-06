@@ -53,6 +53,7 @@ final class LoginController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureTextFieldObservers()
+        addKeyboardDismissal()
     }
     
     // MARK: - Actions
@@ -86,6 +87,10 @@ final class LoginController: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     // MARK: - Helpers
     
     private func checkFormStatus() {
@@ -113,5 +118,10 @@ final class LoginController: UIViewController {
     private func configureTextFieldObservers() {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+    
+    private func addKeyboardDismissal() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 }
