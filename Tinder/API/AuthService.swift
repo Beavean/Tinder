@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import ProgressHUD
 
 struct AuthService {
     
@@ -21,7 +22,7 @@ struct AuthService {
         Service.uploadImage(image: credentials.profileImage) { imageUrl in
             Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { result, error in
                 if let error {
-                    print("DEBUG: Error signing user up.", error.localizedDescription)
+                    ProgressHUD.showError(error.localizedDescription)
                     return
                 }
                 guard let uid = result?.user.uid else { return }

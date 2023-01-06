@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import ProgressHUD
 
 final class HomeController: UIViewController {
     
@@ -58,11 +59,8 @@ final class HomeController: UIViewController {
     }
     
     private func checkIfUserIsLoggedIn() {
-        if Auth.auth().currentUser == nil {
-            presentLoginController()
-        } else {
-            print("DEBUG: User is logged in")
-        }
+        guard Auth.auth().currentUser == nil else { return }
+        presentLoginController()
     }
     
     private func logOut() {
@@ -70,12 +68,12 @@ final class HomeController: UIViewController {
             try Auth.auth().signOut()
             presentLoginController()
         } catch {
-            print("DEBUG: Failed to sign out")
+            ProgressHUD.showError(error.localizedDescription)
         }
     }
     
     private func saveSwipeAndCheckForMatch(forUser user: User, didLike: Bool) {
-        Service.saveSwipe(forUser: user, isLike: didLike) { [weak self] error in
+        Service.saveSwipe(forUser: user, isLike: didLike) { [weak self] _ in
             self?.topCardView = self?.cardViews.last
             guard didLike else { return }
             Service.checkIfMatchExists(forUser: user) { _ in
@@ -221,7 +219,10 @@ extension HomeController: BottomControlsStackViewDelegate {
     }
     
     func handleRefresh() {
-        
+        guard let user = self.user else { return }
+        Service.fetchUsers(forCurrentUser: user) { users in
+            self.viewModels = users.map({ CardViewModel(user: $0) })
+        }
     }
 }
 

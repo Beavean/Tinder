@@ -186,7 +186,6 @@ extension SettingsController: SettingsCellDelegate {
         case .ageRange:
             break
         }
-        print("DEBUG: User is \(user)")
     }
 }
 

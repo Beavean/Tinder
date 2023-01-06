@@ -9,11 +9,10 @@ import UIKit
 
 class AuthButton: UIButton {
     
-    init(title: String, type: ButtonType) {
-        super.init(frame: .zero)
-        setTitle(title, for: .normal)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setTitleColor(.white, for: .normal)
         backgroundColor = .orange
-        titleLabel?.font = .systemFont(ofSize: 16, weight: .heavy)
         layer.cornerRadius = 5
         heightAnchor.constraint(equalToConstant: 50).isActive = true
         isEnabled = false

@@ -111,9 +111,8 @@ extension MessagesController {
 extension MessagesController: MatchHeaderDelegate {
     
     func matchHeader(_ header: MatchHeader, wantsToStartChatWith uid: String) {
-        Service.fetchUser(withUid: uid) { user in
+        Service.fetchUser(withUid: uid) { _ in
             // FIXME: - Add chat module
-            print("DEBUG: Should start chat with \(user.name)")
         }
     }
 }

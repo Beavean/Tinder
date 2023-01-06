@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseStorage
 import FirebaseAuth
+import ProgressHUD
 
 struct Service {
     
@@ -16,7 +17,7 @@ struct Service {
     static func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
         Constants.FBUsersCollection.document(uid).getDocument { snapshot, error in
             if let error {
-                print("DEBUG: Error fetching users -  \(error.localizedDescription)")
+                ProgressHUD.showError(error.localizedDescription)
             }
             guard let dictionary = snapshot?.data() else { return }
             let user = User(dictionary: dictionary)
@@ -33,13 +34,13 @@ struct Service {
             query.getDocuments { snapshot, error in
                 guard let snapshot else { return }
                 if let error {
-                    print("DEBUG: Error fetching users -  \(error.localizedDescription)")
+                    ProgressHUD.showError(error.localizedDescription)
                 }
                 snapshot.documents.forEach({ document in
                     let dictionary = document.data()
                     let user = User(dictionary: dictionary)
                     guard user.uid != Auth.auth().currentUser?.uid,
-                    swipedUserIDs[user.uid] == nil
+                          swipedUserIDs[user.uid] == nil
                     else { return }
                     users.append(user)
                 })
@@ -97,7 +98,7 @@ struct Service {
     
     static func uploadMatch(currentUser: User, matchedUser: User) {
         guard let profileImageUrl = matchedUser.imageURLs.first,
-        let currentUserProfileImageUrl = currentUser.imageURLs.first
+              let currentUserProfileImageUrl = currentUser.imageURLs.first
         else { return }
         
         let matchedUserData = ["uid": matchedUser.uid,
@@ -126,12 +127,12 @@ struct Service {
         let reference = Storage.storage().reference(withPath: "/images/\(filename)")
         reference.putData(imageData) { _, error in
             if let error {
-                print("DEBUG: Error uploading image", error.localizedDescription)
+                ProgressHUD.showError(error.localizedDescription)
                 return
             }
             reference.downloadURL { url, error in
                 if let error {
-                    print("DEBUG: Error downloading image", error.localizedDescription)
+                    ProgressHUD.showError(error.localizedDescription)
                     return
                 }
                 guard let imageUrl = url?.absoluteString else { return }

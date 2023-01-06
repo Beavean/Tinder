@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 protocol AuthenticationDelegate: AnyObject {
     func authenticationComplete()
@@ -24,7 +25,9 @@ final class LoginController: UIViewController {
     }()
     
     private lazy var authButton: AuthButton = {
-        let button = AuthButton(title: "Sign In", type: .system)
+        let button = AuthButton(type: .system)
+        button.setTitle("Log In", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         button.alpha = 0.5
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
@@ -66,10 +69,12 @@ final class LoginController: UIViewController {
     @objc private func handleLogin() {
         guard let email = emailTextField.text,
         let password = passwordTextField.text else { return }
-        AuthService.logUserIn(withEmail: email, password: password) { result, error in
+        AuthService.logUserIn(withEmail: email, password: password) { _, error in
             if let error {
-                print("DEBUG: Error signing user in \(error.localizedDescription)")
+                ProgressHUD.showError(error.localizedDescription)
                 return
+            } else {
+                ProgressHUD.showSuccess()
             }
             self.delegate?.authenticationComplete()
         }

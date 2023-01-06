@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 final class RegistrationController: UIViewController {
     
@@ -22,7 +23,9 @@ final class RegistrationController: UIViewController {
     }()
     
     private lazy var authButton: AuthButton = {
-        let button = AuthButton(title: "Sign Up", type: .system)
+        let button = AuthButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         button.addTarget(self, action: #selector(handleRegisterUser), for: .touchUpInside)
         button.alpha = 0.5
         return button
@@ -77,10 +80,13 @@ final class RegistrationController: UIViewController {
         let credentials = AuthCredentials(email: email, password: password, fullName: fullName, profileImage: profileImage)
         AuthService.registerUser(withCredentials: credentials) { error in
             if let error {
-                print("DEBUG: Error signing user up", error.localizedDescription)
+                ProgressHUD.showError(error.localizedDescription)
                 return
+            } else {
+                ProgressHUD.showSuccess()
             }
             self.delegate?.authenticationComplete()
+            
         }
     }
     
