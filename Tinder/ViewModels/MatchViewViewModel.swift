@@ -18,7 +18,7 @@ struct MatchViewViewModel {
     init(currentUser: User, matchedUser: User) {
         self.currentUser = currentUser
         self.matchedUser = matchedUser
-        matchLabelText = "You and \(matchedUser.name) have liked each other!"
+        matchLabelText = "You and \(matchedUser.fullName) have liked each other!"
         guard let currentUserImageUrl = currentUser.imageURLs.first,
         let matchedUserImageUrl = matchedUser.imageURLs.first
         else { return }

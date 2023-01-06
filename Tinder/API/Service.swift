@@ -80,7 +80,7 @@ struct Service {
     
     static func saveUserData(user: User, completion: @escaping(Error?) -> Void) {
         let data = ["uid": user.uid,
-                    "fullName": user.name,
+                    "fullName": user.fullName,
                     "imageURLs": user.imageURLs,
                     "age": user.age,
                     "bio": user.bio,
@@ -111,7 +111,7 @@ struct Service {
         else { return }
         
         let matchedUserData = ["uid": matchedUser.uid,
-                               "name": matchedUser.name,
+                               "name": matchedUser.fullName,
                                "profileImageUrl": profileImageUrl]
         K.FBMatchedMessagesCollection
             .document(currentUser.uid)
@@ -120,7 +120,7 @@ struct Service {
             .setData(matchedUserData)
         
         let currentUserData = ["uid": currentUser.uid,
-                               "name": currentUser.name,
+                               "name": currentUser.fullName,
                                "profileImageUrl": currentUserProfileImageUrl]
         K.FBMatchedMessagesCollection
             .document(matchedUser.uid)

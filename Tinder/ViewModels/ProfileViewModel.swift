@@ -25,7 +25,7 @@ struct ProfileViewModel {
     
     init(user: User) {
         self.user = user
-        let attributedText = NSMutableAttributedString(string: user.name,
+        let attributedText = NSMutableAttributedString(string: user.fullName,
                                                        attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .semibold)])
         attributedText.append(NSAttributedString(string: "  \(user.age)", attributes: [.font: UIFont.systemFont(ofSize: 22)]))
         userDetailsAttributedString = attributedText

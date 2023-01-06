@@ -176,7 +176,7 @@ extension SettingsController: SettingsCellDelegate {
     func settingsCell(_ cell: SettingsCell, wantsToUpdateUserWith value: String, for section: SettingsSection) {
         switch section {
         case .name:
-            user.name = value
+            user.fullName = value
         case .profession:
             user.profession = value
         case .age:

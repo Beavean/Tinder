@@ -20,7 +20,7 @@ final class CardViewModel {
     
     init(user: User) {
         self.user = user
-        let attributedText = NSMutableAttributedString(string: user.name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy), .foregroundColor: UIColor.white])
+        let attributedText = NSMutableAttributedString(string: user.fullName, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy), .foregroundColor: UIColor.white])
         attributedText.append(NSAttributedString(string: " \(user.age)", attributes: [.font: UIFont.systemFont(ofSize: 24), .foregroundColor: UIColor.white]))
         self.userInfoText = attributedText
         self.imageURLs = user.imageURLs

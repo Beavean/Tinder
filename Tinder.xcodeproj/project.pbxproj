@@ -41,6 +41,8 @@
 		08A65F24296638C300F1E0BB /* MatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A65F23296638C300F1E0BB /* MatchCell.swift */; };
 		08A65F262967833600F1E0BB /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A65F252967833600F1E0BB /* Match.swift */; };
 		08A65F2829678A8300F1E0BB /* MatchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A65F2729678A8300F1E0BB /* MatchCellViewModel.swift */; };
+		08A65F2A2968D8A100F1E0BB /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A65F292968D8A100F1E0BB /* ChatController.swift */; };
+		08A65F2C2968D98D00F1E0BB /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A65F2B2968D98D00F1E0BB /* CustomInputView.swift */; };
 		08A6C48C295DA97F000A1F78 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C48B295DA97F000A1F78 /* ProfileController.swift */; };
 		08A6C48E295DAD03000A1F78 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A6C48D295DAD03000A1F78 /* ProfileCell.swift */; };
 		08B2A45D2951033A00782E14 /* BottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */; };
@@ -88,6 +90,8 @@
 		08A65F23296638C300F1E0BB /* MatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCell.swift; sourceTree = "<group>"; };
 		08A65F252967833600F1E0BB /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		08A65F2729678A8300F1E0BB /* MatchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCellViewModel.swift; sourceTree = "<group>"; };
+		08A65F292968D8A100F1E0BB /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		08A65F2B2968D98D00F1E0BB /* CustomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
 		08A6C48B295DA97F000A1F78 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		08A6C48D295DAD03000A1F78 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		08B2A45C2951033A00782E14 /* BottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomControlsStackView.swift; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				0865622D296466D200964FDD /* KeepSwipingButton.swift */,
 				08A65F212966362E00F1E0BB /* MatchHeader.swift */,
 				08A65F23296638C300F1E0BB /* MatchCell.swift */,
+				08A65F2B2968D98D00F1E0BB /* CustomInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				088BA4C7295901CC0030DA5B /* SettingsController.swift */,
 				08A6C48B295DA97F000A1F78 /* ProfileController.swift */,
 				08A65F1F296631C400F1E0BB /* MessagesController.swift */,
+				08A65F292968D8A100F1E0BB /* ChatController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -421,6 +427,7 @@
 				08A65F262967833600F1E0BB /* Match.swift in Sources */,
 				088BA4CA295903A90030DA5B /* SettingsHeader.swift in Sources */,
 				083B39042955BECC0082070E /* LoginViewModel.swift in Sources */,
+				08A65F2A2968D8A100F1E0BB /* ChatController.swift in Sources */,
 				0865622A29624CF600964FDD /* MatchView.swift in Sources */,
 				0818A5FA295331D500854A5E /* LoginController.swift in Sources */,
 				0818A5F729532B7300854A5E /* CardViewModel.swift in Sources */,
@@ -438,6 +445,7 @@
 				0865622C296466C400964FDD /* SendMessageButton.swift in Sources */,
 				0818A5F32953262500854A5E /* User.swift in Sources */,
 				088BA4CE29590F020030DA5B /* SettingsViewModel.swift in Sources */,
+				08A65F2C2968D98D00F1E0BB /* CustomInputView.swift in Sources */,
 				08B8A20A295F41190004083E /* SegmentedBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

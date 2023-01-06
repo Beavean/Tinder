@@ -63,7 +63,7 @@ struct SettingsViewModel {
         placeholderText = "Enter \(section.description.lowercased())..."
         switch section {
         case .name:
-            value = user.name
+            value = user.fullName
         case .profession:
             value = user.profession
         case .age:

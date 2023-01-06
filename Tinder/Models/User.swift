@@ -9,7 +9,7 @@ import UIKit
 
 struct User {
     
-    var name: String
+    var fullName: String
     var age: Int
     var email: String
     let uid: String
@@ -20,7 +20,7 @@ struct User {
     var bio: String
     
     init(dictionary: [String: Any]) {
-        self.name = dictionary["fullName"] as? String ?? ""
+        self.fullName = dictionary["fullName"] as? String ?? ""
         self.age = dictionary["age"] as? Int ?? 0
         self.email = dictionary["email"] as? String ?? ""
         self.imageURLs = dictionary["imageURLs"] as? [String] ?? [String]()
