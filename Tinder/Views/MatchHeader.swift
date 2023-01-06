@@ -30,7 +30,7 @@ class MatchHeader: UICollectionReusableView {
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(MatchCell.self, forCellWithReuseIdentifier: Constants.UserInterface.matchMessagesCellReuseID)
+        collectionView.register(MatchCell.self, forCellWithReuseIdentifier: K.UI.matchMessagesCellReuseID)
         return collectionView
     }()
     
@@ -66,7 +66,7 @@ extension MatchHeader: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.UserInterface.matchMessagesCellReuseID, for: indexPath) as? MatchCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.UI.matchMessagesCellReuseID, for: indexPath) as? MatchCell else { return UICollectionViewCell() }
         cell.viewModel = MatchCellViewModel(match: matches[indexPath.row])
         return cell
     }

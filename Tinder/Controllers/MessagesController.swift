@@ -54,7 +54,7 @@ class MessagesController: UITableViewController {
     private func configureTableView() {
         tableView.rowHeight = 80
         tableView.tableFooterView = UIView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.UserInterface.messagesCellReuseID)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: K.UI.messagesCellReuseID)
         headerView.delegate = self
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
         tableView.tableHeaderView = headerView
@@ -86,7 +86,7 @@ extension MessagesController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UserInterface.messagesCellReuseID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.UI.messagesCellReuseID, for: indexPath)
         return cell
     }
 }

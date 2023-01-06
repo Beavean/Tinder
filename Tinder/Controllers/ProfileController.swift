@@ -25,7 +25,7 @@ class ProfileController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: Constants.UserInterface.profileCellReuseID)
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: K.UI.profileCellReuseID)
         return collectionView
     }()
     
@@ -173,7 +173,7 @@ extension ProfileController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.UserInterface.profileCellReuseID, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: K.UI.profileCellReuseID, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
         cell.imageView.sd_setImage(with: viewModel.imageURLs[indexPath.row])
         return cell
     }

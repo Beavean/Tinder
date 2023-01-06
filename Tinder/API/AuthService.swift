@@ -30,8 +30,8 @@ struct AuthService {
                             "fullName": credentials.fullName,
                             "imageURLs": [imageUrl],
                             "uid": uid,
-                            "age": 99] as [String: Any]
-                Constants.FBUsersCollection.document(uid).setData(data, completion: completion)
+                            "age": 18] as [String: Any]
+                K.FBUsersCollection.document(uid).setData(data, completion: completion)
             }
         }
     }

@@ -168,7 +168,7 @@ final class RegistrationController: UIViewController {
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    // swiftlint:disable colon
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         profileImage = image
@@ -179,4 +179,5 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         selectPhotoButton.imageView?.contentMode = .scaleAspectFill
         dismiss(animated: true)
     }
+    // swiftlint:enable colon
 }

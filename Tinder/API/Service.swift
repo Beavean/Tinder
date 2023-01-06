@@ -15,7 +15,7 @@ struct Service {
     // MARK: - Fetch
     
     static func fetchUser(withUid uid: String, completion: @escaping(User) -> Void) {
-        Constants.FBUsersCollection.document(uid).getDocument { snapshot, error in
+        K.FBUsersCollection.document(uid).getDocument { snapshot, error in
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
             }
@@ -27,7 +27,7 @@ struct Service {
     
     static func fetchUsers(forCurrentUser user: User, completion: @escaping([User]) -> Void) {
         var users = [User]()
-        let query = Constants.FBUsersCollection
+        let query = K.FBUsersCollection
             .whereField("age", isGreaterThanOrEqualTo: user.minSeekingAge)
             .whereField("age", isLessThanOrEqualTo: user.maxSeekingAge)
         fetchSwipes { swipedUserIDs in
@@ -51,7 +51,7 @@ struct Service {
     
     private static func fetchSwipes(completion: @escaping([String: Bool]) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Constants.FBSwipesCollection.document(uid).getDocument { snapshot, error in
+        K.FBSwipesCollection.document(uid).getDocument { snapshot, error in
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
             }
@@ -65,7 +65,7 @@ struct Service {
     
     static func fetchMatches(completion: @escaping([Match]) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Constants.FBMatchedMessagesCollection.document(uid).collection("matches").getDocuments { snapshot, error in
+        K.FBMatchedMessagesCollection.document(uid).collection("matches").getDocuments { snapshot, error in
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
             }
@@ -87,20 +87,20 @@ struct Service {
                     "profession": user.profession,
                     "minSeekingAge": user.minSeekingAge,
                     "maxSeekingAge": user.maxSeekingAge] as [String: Any]
-        Constants.FBUsersCollection.document(user.uid).setData(data, completion: completion)
+        K.FBUsersCollection.document(user.uid).setData(data, completion: completion)
     }
     
     static func saveSwipe(forUser user: User, isLike: Bool, completion: ((Error?) -> Void)?) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        Constants.FBSwipesCollection.document(currentUid).getDocument { snapshot, error in
+        K.FBSwipesCollection.document(currentUid).getDocument { snapshot, error in
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
             }
             let data = [user.uid: isLike]
             if snapshot?.exists == true {
-                Constants.FBSwipesCollection.document(currentUid).updateData(data, completion: completion)
+                K.FBSwipesCollection.document(currentUid).updateData(data, completion: completion)
             } else {
-                Constants.FBSwipesCollection.document(currentUid).setData(data, completion: completion)
+                K.FBSwipesCollection.document(currentUid).setData(data, completion: completion)
             }
         }
     }
@@ -113,7 +113,7 @@ struct Service {
         let matchedUserData = ["uid": matchedUser.uid,
                                "name": matchedUser.name,
                                "profileImageUrl": profileImageUrl]
-        Constants.FBMatchedMessagesCollection
+        K.FBMatchedMessagesCollection
             .document(currentUser.uid)
             .collection("matches")
             .document(matchedUser.uid)
@@ -122,7 +122,7 @@ struct Service {
         let currentUserData = ["uid": currentUser.uid,
                                "name": currentUser.name,
                                "profileImageUrl": currentUserProfileImageUrl]
-        Constants.FBMatchedMessagesCollection
+        K.FBMatchedMessagesCollection
             .document(matchedUser.uid)
             .collection("matches")
             .document(currentUser.uid)
@@ -154,7 +154,7 @@ struct Service {
     
     static func checkIfMatchExists(forUser user: User, completion: @escaping(Bool) -> Void) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        Constants.FBSwipesCollection.document(user.uid).getDocument { snapshot, error in
+        K.FBSwipesCollection.document(user.uid).getDocument { snapshot, error in
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
             }

@@ -84,7 +84,7 @@ final class SettingsController: UITableViewController {
         tableView.tableHeaderView = headerView
         tableView.backgroundColor = .systemGroupedBackground
         tableView.sectionHeaderTopPadding = 0
-        tableView.register(SettingsCell.self, forCellReuseIdentifier: Constants.UserInterface.settingsCellReuseID)
+        tableView.register(SettingsCell.self, forCellReuseIdentifier: K.UI.settingsCellReuseID)
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
         tableView.tableFooterView = footerView
         footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 88)
@@ -109,7 +109,7 @@ extension SettingsController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UserInterface.settingsCellReuseID, for: indexPath) as? SettingsCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.UI.settingsCellReuseID, for: indexPath) as? SettingsCell,
               let section = SettingsSection(rawValue: indexPath.section)
         else { return UITableViewCell() }
         let viewModel = SettingsViewModel(user: user, section: section)
