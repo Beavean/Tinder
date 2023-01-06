@@ -80,14 +80,14 @@ final class RegistrationController: UIViewController {
               let profileImage
         else { return }
         let credentials = AuthCredentials(email: email, password: password, fullName: fullName, profileImage: profileImage)
-        AuthService.registerUser(withCredentials: credentials) { error in
+        AuthService.registerUser(withCredentials: credentials) { [weak self] error in
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
                 return
             } else {
                 ProgressHUD.showSuccess()
             }
-            self.delegate?.authenticationComplete()
+            self?.delegate?.authenticationComplete()
             
         }
     }

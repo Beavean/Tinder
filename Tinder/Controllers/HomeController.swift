@@ -45,16 +45,16 @@ final class HomeController: UIViewController {
     // MARK: - API
     
     private func fetchUsers(forCurrentUser user: User) {
-        Service.fetchUsers(forCurrentUser: user) { users in
-            self.viewModels = users.map({ CardViewModel(user: $0) })
+        Service.fetchUsers(forCurrentUser: user) { [weak self] users in
+            self?.viewModels = users.map({ CardViewModel(user: $0) })
         }
     }
     
     private func fetchCurrentUserAndCards() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Service.fetchUser(withUid: uid) { user in
-            self.user = user
-            self.fetchUsers(forCurrentUser: user)
+        Service.fetchUser(withUid: uid) { [weak self]  user in
+            self?.user = user
+            self?.fetchUsers(forCurrentUser: user)
         }
     }
     
@@ -176,7 +176,8 @@ extension HomeController: SettingsControllerDelegate {
         logOut()
     }
     
-    func settingsController(_ controller: SettingsController, wantsToUpdate user: User) {
+    func settingsController(_ controller: SettingsController?, wantsToUpdate user: User?) {
+        guard let controller, let user else { return }
         controller.dismiss(animated: true)
         self.user = user
     }
@@ -220,8 +221,8 @@ extension HomeController: BottomControlsStackViewDelegate {
     
     func handleRefresh() {
         guard let user = self.user else { return }
-        Service.fetchUsers(forCurrentUser: user) { users in
-            self.viewModels = users.map({ CardViewModel(user: $0) })
+        Service.fetchUsers(forCurrentUser: user) { [weak self] users in
+            self?.viewModels = users.map({ CardViewModel(user: $0) })
         }
     }
 }

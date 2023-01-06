@@ -9,7 +9,7 @@ import UIKit
 import ProgressHUD
 
 protocol SettingsControllerDelegate: AnyObject {
-    func settingsController(_ controller: SettingsController, wantsToUpdate user: User)
+    func settingsController(_ controller: SettingsController?, wantsToUpdate user: User?)
     func settingsControllerWantsToLogout(_ controller: SettingsController)
 }
 
@@ -52,8 +52,8 @@ final class SettingsController: UITableViewController {
     @objc private func handleDone() {
         view.endEditing(true)
         ProgressHUD.show("Saving your data", icon: .succeed, delay: 2)
-        Service.saveUserData(user: user) { error in
-            self.delegate?.settingsController(self, wantsToUpdate: self.user)
+        Service.saveUserData(user: user) { [weak self] error in
+            self?.delegate?.settingsController(self, wantsToUpdate: self?.user)
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
             }
@@ -64,8 +64,8 @@ final class SettingsController: UITableViewController {
     
     func uploadImage(image: UIImage) {
         ProgressHUD.show("Saving image", icon: .added, delay: 2)
-        Service.uploadImage(image: image) { imageUrl in
-            self.user.imageURLs.append(imageUrl)
+        Service.uploadImage(image: image) { [weak self] imageUrl in
+            self?.user.imageURLs.append(imageUrl)
             ProgressHUD.dismiss()
         }
     }

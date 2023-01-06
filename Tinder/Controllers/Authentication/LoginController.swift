@@ -70,14 +70,14 @@ final class LoginController: UIViewController {
     @objc private func handleLogin() {
         guard let email = emailTextField.text,
         let password = passwordTextField.text else { return }
-        AuthService.logUserIn(withEmail: email, password: password) { _, error in
+        AuthService.logUserIn(withEmail: email, password: password) { [weak self] _, error in
             if let error {
                 ProgressHUD.showError(error.localizedDescription)
                 return
             } else {
                 ProgressHUD.showSuccess()
             }
-            self.delegate?.authenticationComplete()
+            self?.delegate?.authenticationComplete()
         }
     }
     

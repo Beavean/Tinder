@@ -44,8 +44,8 @@ class MessagesController: UITableViewController {
     // MARK: - API
     
     private func fetchMatches() {
-        Service.fetchMatches { matches in
-            self.headerView.matches = matches
+        Service.fetchMatches { [weak self] matches in
+            self?.headerView.matches = matches
         }
     }
     
