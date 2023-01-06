@@ -52,6 +52,9 @@ struct Service {
     private static func fetchSwipes(completion: @escaping([String: Bool]) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Constants.FBSwipesCollection.document(uid).getDocument { snapshot, error in
+            if let error {
+                ProgressHUD.showError(error.localizedDescription)
+            }
             guard let data = snapshot?.data() as? [String: Bool] else {
                 completion([String: Bool]())
                 return
@@ -63,6 +66,9 @@ struct Service {
     static func fetchMatches(completion: @escaping([Match]) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Constants.FBMatchedMessagesCollection.document(uid).collection("matches").getDocuments { snapshot, error in
+            if let error {
+                ProgressHUD.showError(error.localizedDescription)
+            }
             guard let snapshot else { return }
             let matches = snapshot.documents.map({ Match(dictionary: $0.data()) })
             completion(matches)
@@ -87,6 +93,9 @@ struct Service {
     static func saveSwipe(forUser user: User, isLike: Bool, completion: ((Error?) -> Void)?) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         Constants.FBSwipesCollection.document(currentUid).getDocument { snapshot, error in
+            if let error {
+                ProgressHUD.showError(error.localizedDescription)
+            }
             let data = [user.uid: isLike]
             if snapshot?.exists == true {
                 Constants.FBSwipesCollection.document(currentUid).updateData(data, completion: completion)
@@ -146,6 +155,9 @@ struct Service {
     static func checkIfMatchExists(forUser user: User, completion: @escaping(Bool) -> Void) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         Constants.FBSwipesCollection.document(user.uid).getDocument { snapshot, error in
+            if let error {
+                ProgressHUD.showError(error.localizedDescription)
+            }
             guard let data = snapshot?.data(), let didMatch = data[currentUid] as? Bool else { return }
             completion(didMatch)
         }
