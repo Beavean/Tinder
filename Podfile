@@ -1,8 +1,8 @@
 platform :ios, '15.0'
+inhibit_all_warnings!
 
 target 'Tinder' do
   use_frameworks!
-#  inhibit_all_warnings!
 
 	pod 'FirebaseCore'
 	pod 'FirebaseAuth'

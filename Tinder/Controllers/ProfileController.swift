@@ -12,7 +12,7 @@ protocol ProfileControllerDelegate: AnyObject {
     func profileController(_ controller: ProfileController, didDislikeUser user: User)
 }
 
-class ProfileController: UIViewController {
+final class ProfileController: UIViewController {
     
     // MARK: - UI Elements
     

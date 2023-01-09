@@ -11,7 +11,7 @@ protocol CustomInputViewDelegate: AnyObject {
     func inputView(_ inputView: CustomInputView, wantsToSend message: String)
 }
 
-class CustomInputView: UIView {
+final class CustomInputView: UIView {
     
     // MARK: - Properties
     

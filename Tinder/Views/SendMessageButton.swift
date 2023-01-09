@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SendMessageButton: UIButton {
+final class SendMessageButton: UIButton {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)

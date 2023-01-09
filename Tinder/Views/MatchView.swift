@@ -11,7 +11,7 @@ protocol MatchViewDelegate: AnyObject {
     func matchView(_ view: MatchView, wantsToSendMessageTo user: User)
 }
 
-class MatchView: UIView {
+final class MatchView: UIView {
     
     // MARK: - UI Elements
     

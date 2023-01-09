@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MessagesController: UITableViewController {
+final class MessagesController: UITableViewController {
     
     // MARK: - UI Elements
     

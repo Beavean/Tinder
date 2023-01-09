@@ -11,7 +11,7 @@ protocol SettingsFooterDelegate: AnyObject {
     func handleLogout()
 }
 
-class SettingsFooter: UIView {
+final class SettingsFooter: UIView {
     
     // MARK: - Properties
     

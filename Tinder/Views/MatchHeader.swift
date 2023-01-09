@@ -11,7 +11,7 @@ protocol MatchHeaderDelegate: AnyObject {
     func matchHeader(_ header: MatchHeader, wantsToStartChatWith uid: String)
 }
 
-class MatchHeader: UICollectionReusableView {
+final class MatchHeader: UICollectionReusableView {
     
     // MARK: - UI Elements
     

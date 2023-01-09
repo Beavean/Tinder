@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatController: UICollectionViewController {
+final class ChatController: UICollectionViewController {
     
     // MARK: - UI Elements
     
@@ -39,7 +39,7 @@ class ChatController: UICollectionViewController {
     
     override var inputAccessoryView: UIView? {
         get { return customInputView }
-        set { self.inputAccessoryView = newValue }
+        set {}
     }
     
     override var canBecomeFirstResponder: Bool {

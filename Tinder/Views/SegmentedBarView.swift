@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SegmentedBarView: UIStackView {
+final class SegmentedBarView: UIStackView {
     
     init(numberOfSegments: Int) {
         super.init(frame: .zero)
